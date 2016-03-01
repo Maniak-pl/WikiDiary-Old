@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,7 +24,6 @@ import pl.maniak.wikidiary.db.DBHelper;
 import pl.maniak.wikidiary.helpers.DateHelper;
 import pl.maniak.wikidiary.helpers.WikiParser;
 import pl.maniak.wikidiary.models.WikiNote;
-import pl.maniak.wikidiary.utils.L;
 
 /**
  * Created by maniak on 02.03.16.
@@ -56,8 +54,15 @@ public class PreparingNoteFragment extends Fragment {
         ButterKnife.bind(this, root);
 
 
-        preparingEntryOnWiki();
+
         return root;
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(mPage != null) {
+            preparingEntryOnWiki();
+        }
     }
     
     private void testAddToDatabaseNote() {
@@ -68,10 +73,10 @@ public class PreparingNoteFragment extends Fragment {
         Date dateBefore1Days = cal.getTime();
 
 
-        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Do pracy poszedłem piechotą", new Date(), new Date()));
-        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Do pracy poszedłem piechotą", dateBefore1Days, new Date()));
-        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Spotkanie z mBankiem", new Date(), new Date()));
-        dbHelper.addWikiNote(new WikiNote("Today", "Maksio w żłobku o 9.00", new Date(), new Date()));
+        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Do pracy poszedłem piechotą", new Date()));
+        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Do pracy poszedłem piechotą", dateBefore1Days));
+        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Spotkanie z mBankiem", new Date()));
+        dbHelper.addWikiNote(new WikiNote("Today", "Maksio w żłobku o 9.00", new Date()));
 
     }
 
@@ -99,7 +104,7 @@ public class PreparingNoteFragment extends Fragment {
             allLinesNote.add(WikiParser.addHeadline(day, 2));
             allLinesNote.add("");
             for(String category: dateMap.get(day).keySet()) {
-                allLinesNote.add(WikiParser.addList(category, 1));
+                allLinesNote.add(WikiParser.addListBold(category, 1));
                 for(String note: dateMap.get(day).get(category)) {
                     allLinesNote.add(WikiParser.addList(note, 2));
                 }

@@ -1,8 +1,6 @@
 package pl.maniak.wikidiary.fragments;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,9 +23,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
-import pl.maniak.wikidiary.Constants;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.utils.L;
+import pl.maniak.wikidiary.db.DBHelper;
+import pl.maniak.wikidiary.models.Tag;
 import pl.maniak.wikidiary.views.FlowLayout;
 
 /**
@@ -39,7 +38,10 @@ public class SettingsFragment extends Fragment {
     @Bind(R.id.settingsContainerTags)
     pl.maniak.wikidiary.views.FlowLayout mFlowLayout;
 
-    private Set<String> setTag = new TreeSet<String>();
+    private Set<Tag> setTag = new TreeSet<Tag>();
+
+    @Inject
+    public DBHelper dbHelper;
 
     @Inject
     SharedPreferences preferences;
@@ -82,14 +84,10 @@ public class SettingsFragment extends Fragment {
     }
 
 
-
-
-
     @OnClick(R.id.addTagBtn)
     public void onClick() {
-        if(!addTagEt.getText().toString().equals("")) {
-            setTag.add(addTagEt.getText().toString());
-            saveTag(setTag);
+        if (!addTagEt.getText().toString().equals("")) {
+            addTag(addTagEt.getText().toString());
             addTagEt.setText("");
             reload();
         }
@@ -103,19 +101,24 @@ public class SettingsFragment extends Fragment {
 
     private void initTagContener() {
         mFlowLayout.removeAllViews();
-        List<String> listTag = new ArrayList();
+        List<Tag> listTag = new ArrayList();
         listTag.addAll(setTag);
         for (int i = 0; i < listTag.size(); i++) {
             TextView tv = (TextView) getActivity().getLayoutInflater().inflate(R.layout.tag_item, null);
-            tv.setText(listTag.get(i));
+            tv.setText(listTag.get(i).getTag());
             FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(10, 10, 10, 10);
             tv.setLayoutParams(params);
             tv.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    setTag.remove(((TextView) v).getText().toString());
-                    saveTag(setTag);
+                    String tag = ((TextView) v).getText().toString();
+                    setTag.remove(new Tag(tag));
+                    try {
+                        dbHelper.deleteTag(tag);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     reload();
                     return false;
                 }
@@ -125,31 +128,20 @@ public class SettingsFragment extends Fragment {
         mFlowLayout.invalidate();
     }
 
-    public boolean saveTag(Set<String> set) {
-        L.e("saveArray()");
+    public void addTag(String tag) {
 
-        List<String> list = new ArrayList();
-        list.addAll(set);
-
-        SharedPreferences.Editor edit = preferences.edit();
-        edit.putInt(Constants.PREF_TAG_SIZE, list.size());
-
-        for (int i = 0; i < list.size(); i++) {
-            edit.remove(Constants.PREF_TAG + i);
-            edit.putString(Constants.PREF_TAG + i, list.get(i));
+        try {
+            dbHelper.addTag(new Tag(tag));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        return edit.commit();
     }
 
-    public List<String> loadTag() {
-        L.e("loadArray()");
-        List<String> list = new ArrayList();
-        int size = preferences.getInt(Constants.PREF_TAG_SIZE, 0);
-
-        for (int i = 0; i < size; i++) {
-            list.add(preferences.getString(Constants.PREF_TAG + i, null));
+    public List<Tag> loadTag() {
+        try {
+            return dbHelper.getAllTags();
+        } catch (SQLException e) {
+            return new ArrayList<>();
         }
-        return list;
     }
 }

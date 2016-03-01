@@ -3,8 +3,6 @@ package pl.maniak.wikidiary.models;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.util.Date;
-
 /**
  * Created by Maniak on 2015-10-22.
  */
@@ -19,16 +17,15 @@ public class WikiNote {
     @DatabaseField
     private java.util.Date Date;
     @DatabaseField
-    private java.util.Date CreationDate;
+    private boolean isSend;
 
     public WikiNote() {
     }
 
-    public WikiNote(String tag, String description, java.util.Date date, java.util.Date creationDate) {
+    public WikiNote(String tag, String description, java.util.Date date) {
         Tag = tag;
         Description = description;
         Date = date;
-        CreationDate = creationDate;
 
     }
 
@@ -56,12 +53,12 @@ public class WikiNote {
         this.Date = mDate;
     }
 
-    public java.util.Date getCreationDate() {
-        return CreationDate;
+    public boolean isSend() {
+        return isSend;
     }
 
-    public void setCreationDate(java.util.Date creationDate) {
-        CreationDate = creationDate;
+    public void setIsSend(boolean isSend) {
+        this.isSend = isSend;
     }
 
     @Override

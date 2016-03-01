@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.maniak.wikidiary.models.Tag;
 import pl.maniak.wikidiary.models.WikiNote;
 import pl.maniak.wikidiary.utils.L;
 
@@ -26,6 +28,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
 
     private Dao<WikiNote, Long> wikiNoteDao = null;
+    private Dao<Tag, Long> tagDao = null;
 
 
     public DBHelper(Context context) {
@@ -37,6 +40,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         try {
 
             TableUtils.createTable(connectionSource, WikiNote.class);
+            TableUtils.createTable(connectionSource, Tag.class);
 
         } catch (SQLException e) {
             L.e("DBHelper.onCreate()", e);
@@ -47,6 +51,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, WikiNote.class, true);
+            TableUtils.dropTable(connectionSource, Tag.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             L.e("DBHelper.onUpgrade()", e);
@@ -58,6 +63,37 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             wikiNoteDao = getDao(WikiNote.class);
         }
         return wikiNoteDao;
+    }
+
+    public Dao<Tag, Long> getTagDao() throws SQLException{
+        if(tagDao == null){
+            tagDao = getDao(Tag.class);
+        }
+        return tagDao;
+    }
+
+    public List<Tag> getAllTags(List<String> tagsNames) throws SQLException {
+        List<Tag> tagsResult;
+
+        tagsResult = getTagDao().queryBuilder().where().in("tag", tagsNames).query();
+
+        return tagsResult;
+    }
+
+    public void addTag(Tag tag) throws SQLException{
+        getTagDao().createOrUpdate(tag);
+    }
+
+    public void deleteTag(String tag) throws SQLException{
+        DeleteBuilder<Tag,Long> delete = getTagDao().deleteBuilder();
+        delete.where().eq("tag", tag);
+        delete.delete();
+    }
+
+    public List<Tag> getAllTags() throws SQLException{
+        List<Tag> tags = new ArrayList<>(getTagDao().queryForAll());
+
+        return tags;
     }
 
 

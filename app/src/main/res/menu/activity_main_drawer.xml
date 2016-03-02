@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="screen">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/nav_label_settings" />
+        <item
+            android:id="@+id/nav_code_generation"
+            android:icon="@drawable/ic_menu_code_generation"
+            android:title="@string/nav_label_code_generation" />
+    </item>
+
+    <item android:title="command">
+        <menu>
+            <item
+                android:id="@+id/nav_s_health"
+                android:icon="@drawable/ic_menu_s_health"
+                android:title="S Health" />
+            <item
+                android:id="@+id/nav_mic"
+                android:icon="@drawable/ic_menu_mic"
+                android:title="Mic" />
+            <item
+                android:id="@+id/nav_time"
+                android:icon="@drawable/ic_menu_time"
+                android:title="Time" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>

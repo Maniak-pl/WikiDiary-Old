@@ -3,13 +3,17 @@
 
     <item android:title="screen">
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_settings"
-            android:title="@string/nav_label_settings" />
+            android:id="@+id/nav_main"
+            android:icon="@drawable/ic_menu_main"
+            android:title="@string/nav_label_main" />
         <item
             android:id="@+id/nav_code_generation"
             android:icon="@drawable/ic_menu_code_generation"
             android:title="@string/nav_label_code_generation" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/nav_label_settings" />
     </item>
 
     <item android:title="command">

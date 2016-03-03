@@ -20,12 +20,12 @@
             android:hint="Add Tag"
             android:maxLength="20"
             />
-        <ImageButton
+        <ImageView
             android:id="@+id/addTagBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".1"
-            android:src="@android:drawable/ic_input_add"
+            android:src="@drawable/ic_add_box_24dp"
             />
 
         </LinearLayout>

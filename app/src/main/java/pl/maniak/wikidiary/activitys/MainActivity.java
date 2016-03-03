@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
+            case R.id.nav_main:
+                mViewPager.setCurrentItem(0);
             case R.id.nav_code_generation:
                 mViewPager.setCurrentItem(1);
                 break;

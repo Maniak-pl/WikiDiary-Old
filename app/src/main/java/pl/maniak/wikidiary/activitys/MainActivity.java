@@ -1,5 +1,6 @@
 package pl.maniak.wikidiary.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startSettings();
             return true;
         }
 
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mViewPager.setCurrentItem(1);
                 break;
             case R.id.nav_settings:
-                mViewPager.setCurrentItem(2);
+                startSettings();
                 break;
             case R.id.nav_s_health:
                 break;
@@ -170,5 +172,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             return null;
         }
+    }
+
+    private void startSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }

@@ -13,6 +13,9 @@
     <string name="ok">Ok</string>
     <string name="cancel">Anuluj</string>
 
-
+    <string name="pref_header_email">Email</string>
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_title_send_options">Sending an e-mail</string>
 
 </resources>

@@ -64,21 +64,6 @@ public class PreparingNoteFragment extends Fragment {
             preparingEntryOnWiki();
         }
     }
-    
-    private void testAddToDatabaseNote() {
-        // TODO: 02.03.16 TEST
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.DATE, -1);
-        Date dateBefore1Days = cal.getTime();
-
-
-        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Do pracy poszedłem piechotą", new Date()));
-        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Do pracy poszedłem piechotą", dateBefore1Days));
-        dbHelper.addWikiNote(new WikiNote("Mobiltek", "Spotkanie z mBankiem", new Date()));
-        dbHelper.addWikiNote(new WikiNote("Today", "Maksio w żłobku o 9.00", new Date()));
-
-    }
 
     @Override
     public void onDestroyView() {

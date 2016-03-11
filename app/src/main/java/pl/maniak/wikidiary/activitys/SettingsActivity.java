@@ -2,7 +2,6 @@ package pl.maniak.wikidiary.activitys;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,14 +12,13 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import java.util.List;
 
+import pl.maniak.wikidiary.Constants;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.utils.L;
 
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
@@ -152,9 +150,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_email);
             setHasOptionsMenu(true);
 
-            bindPreferenceSummaryToValue(findPreference("send_email_name"));
-            bindPreferenceSummaryToValue(findPreference("send_email_user"));
-            bindPreferenceSummaryToValue(findPreference("send_email_password"));
+            bindPreferenceSummaryToValue(findPreference(Constants.SEND_EMAIL_FROM));
+            bindPreferenceSummaryToValue(findPreference(Constants.SEND_EMAIL_TO));
+            bindPreferenceSummaryToValue(findPreference(Constants.SEND_EMAIL_PASSWORD));
+            bindPreferenceSummaryToValue(findPreference(Constants.SEND_EMAIL_TITLE));
         }
 
         @Override

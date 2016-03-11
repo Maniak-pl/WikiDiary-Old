@@ -1,6 +1,8 @@
 package pl.maniak.wikidiary.activitys;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -13,13 +15,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+
+import de.greenrobot.event.EventBus;
+import pl.maniak.wikidiary.App;
+import pl.maniak.wikidiary.Constants;
 import pl.maniak.wikidiary.R;
+import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
 import pl.maniak.wikidiary.fragments.SettingsFragment;
+import pl.maniak.wikidiary.utils.L;
+import pl.maniak.wikidiary.utils.Mail;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +83,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,7 +149,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void sendMail() {
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sendEmail("ok");
+            }
+        }).start();
     }
 
     /**
@@ -174,8 +202,102 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
+    public void onEventMainThread(CommandEvent event) {
+        L.w("BaseActivity.onEventMainThread() called with " + "syncEvent = [" + event.getStatus() + "]");
+
+        switch (event.getStatus()) {
+            case CommandEvent.START:
+                showProgress();
+                break;
+            case CommandEvent.STOP:
+                stopProgress();
+                break;
+            case CommandEvent.CLEAR:
+                stopProgress();
+
+                break;
+            case CommandEvent.SHOW_ERROR:
+                showError(event.getMessage());
+                break;
+            case CommandEvent.SHOW_HEALTH_RESULT:
+//                if(this instanceof MainActivity) {
+//                    int steps = Integer.parseInt(event.getMessage());
+//                    ((MainActivity)this).putHealth(steps);
+//                }
+                break;
+
+        }
+    }
+
+    public void sendEmail(String str) {
+        Mail mail = new Mail(App.getInstance().getPrefString(Constants.SEND_EMAIL_FROM), App.getInstance().getPrefString(Constants.SEND_EMAIL_PASSWORD));
+
+
+        App.postEvent(CommandEvent.START);
+        String[] toArr = {App.getInstance().getPrefString(Constants.SEND_EMAIL_TO)}; // This is an array, you can add more emails, just separate them with a coma
+        mail.setTo(toArr); // load array to setTo function
+        mail.setFrom(App.getInstance().getPrefString(Constants.SEND_EMAIL_FROM)); // who is sending the email
+        mail.setSubject(App.getInstance().getPrefString(Constants.SEND_EMAIL_TITLE));
+        mail.setBody(str);
+
+        try {
+            if (mail.send()) {
+                // success
+                App.postMessage(R.string.email_successfully);
+                App.postEvent(CommandEvent.CLEAR);
+
+            } else {
+                // failure
+                App.postMessage(R.string.email_failure);
+
+            }
+        } catch (Exception e) {
+            Log.e("Maniak", "MainActivity.sendEmail() ", e);
+            App.postMessage("Exception: " + e.getMessage());
+        } finally {
+            App.postEvent(CommandEvent.STOP);
+        }
+    }
+
+    public void showError(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+    }
+
     private void startSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+         /*
+   _____ _                     _____
+  / ____| |                   |  __ \
+ | (___ | |__   _____      __ | |__) | __ ___   __ _ _ __ ___  ___ ___
+  \___ \| '_ \ / _ \ \ /\ / / |  ___/ '__/ _ \ / _` | '__/ _ \/ __/ __|
+  ____) | | | | (_) \ V  V /  | |   | | | (_) | (_| | | |  __/\__ \__ \
+ |_____/|_| |_|\___/ \_/\_/   |_|   |_|  \___/ \__, |_|  \___||___/___/
+                                                __/ |
+                                               |___/
+     */
+
+    private ProgressDialog mProgressDialog;
+
+
+    public void showProgress() {
+//        L.i("BaseActivity.showProgress() ");
+
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.show();
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        mProgressDialog.setContentView(R.layout.progres_bar);
+    }
+
+    public void stopProgress() {
+//        L.i("BaseActivity.stopProgress() ");
+        if (mProgressDialog != null)
+            mProgressDialog.dismiss();
+
     }
 }

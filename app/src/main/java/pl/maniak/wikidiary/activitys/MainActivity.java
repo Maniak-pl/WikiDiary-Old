@@ -21,14 +21,18 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import javax.inject.Inject;
+
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.Constants;
 import pl.maniak.wikidiary.R;
+import pl.maniak.wikidiary.db.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
 import pl.maniak.wikidiary.fragments.SettingsFragment;
+import pl.maniak.wikidiary.helpers.WikiHelper;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
 
@@ -48,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    @Inject
+    public DBHelper dbHelper;
 
 
     @Override
@@ -80,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        App.getComponent().inject(this);
 
     }
 
@@ -149,12 +156,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void sendMail() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sendEmail("ok");
-            }
-        }).start();
+        if(App.getInstance().getPrefBoolea(Constants.SEND_EMAIL_MESSAGE)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    sendEmail(WikiHelper.preparingEntryOnWiki(dbHelper.getWikiNotes()));
+                }
+            }).start();
+        } else {
+            App.postMessage(R.string.turn_on_mail);
+        }
+
     }
 
     /**
@@ -215,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case CommandEvent.CLEAR:
                 stopProgress();
-
+                dbHelper.deleteAllWikiNote();
                 break;
             case CommandEvent.SHOW_ERROR:
                 showError(event.getMessage());
@@ -232,8 +244,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void sendEmail(String str) {
         Mail mail = new Mail(App.getInstance().getPrefString(Constants.SEND_EMAIL_FROM), App.getInstance().getPrefString(Constants.SEND_EMAIL_PASSWORD));
-
-
         App.postEvent(CommandEvent.START);
         String[] toArr = {App.getInstance().getPrefString(Constants.SEND_EMAIL_TO)}; // This is an array, you can add more emails, just separate them with a coma
         mail.setTo(toArr); // load array to setTo function
@@ -254,14 +264,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } catch (Exception e) {
             Log.e("Maniak", "MainActivity.sendEmail() ", e);
-            App.postMessage("Exception: " + e.getMessage());
+            App.postMessage(getString(R.string.email_failure)+"\nException: " + e.getMessage());
         } finally {
             App.postEvent(CommandEvent.STOP);
         }
     }
 
     public void showError(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
     }
 

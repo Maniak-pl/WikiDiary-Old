@@ -23,7 +23,6 @@ public class App extends Application {
     private static App instance = new App();
     private static AppComponent appComponent;
     SharedPreferences preferences;
-    public static final Bus bus = new Bus(ThreadEnforcer.ANY);
 
     @Override
     public void onCreate() {
@@ -39,7 +38,7 @@ public class App extends Application {
         return instance;
     }
 
-    public static AppComponent getAppComponent() {
+    public static AppComponent getComponent() {
         return appComponent;
     }
 
@@ -62,11 +61,19 @@ public class App extends Application {
         EventBus.getDefault().post(new CommandEvent(syncEvent, mesage));
     }
 
-    public String getPrefString(String key) {
+    private SharedPreferences getPreferences() {
         if(preferences == null ) {
             preferences = PreferenceManager.getDefaultSharedPreferences(this);
         }
-        return preferences.getString(key, "");
+        return preferences;
+    }
+
+    public String getPrefString(String key) {
+        return getPreferences().getString(key, "");
+    }
+
+    public Boolean getPrefBoolea(String key){
+        return getPreferences().getBoolean(key, false);
     }
 
 

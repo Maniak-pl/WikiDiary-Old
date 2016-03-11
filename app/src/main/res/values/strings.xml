@@ -20,5 +20,6 @@
 
     <string name="email_failure">Set up an account in Settings</string>
     <string name="email_successfully"> Email was sent successfully.</string>
+    <string name="turn_on_mail">Turn on an email in settings</string>
 
 </resources>

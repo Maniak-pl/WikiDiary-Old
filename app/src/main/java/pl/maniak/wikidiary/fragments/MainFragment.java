@@ -63,7 +63,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_main, null);
-        App.getAppComponent().inject(this);
+        App.getComponent().inject(this);
         ButterKnife.bind(this, root);
         setUpView();
 

@@ -1,5 +1,11 @@
 package pl.maniak.wikidiary.helpers;
 
+import java.util.Date;
+
+import pl.maniak.wikidiary.App;
+import pl.maniak.wikidiary.models.WikiNote;
+import pl.maniak.wikidiary.utils.L;
+
 /**
  * Created by maniak on 02.03.16.
  */
@@ -48,5 +54,17 @@ public class WikiParser {
         str.append(note);
 
         return str.toString();
+    }
+
+    public static String putHealth(int steps) {
+
+        String img = "";
+        if (steps >= 10000) {
+            img = "  {{ :family:s-health-samsung-logo.jpg?direct&200 |}}";
+        } else {
+            img = "  {{ :family:s-health-samsung-logo-fail.jpg?direct&200 |}}";
+        }
+
+         return ("Kroków " + steps + "/10000" + img);
     }
 }

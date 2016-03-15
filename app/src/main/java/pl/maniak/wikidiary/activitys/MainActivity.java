@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
@@ -33,6 +35,9 @@ import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
 import pl.maniak.wikidiary.fragments.SettingsFragment;
 import pl.maniak.wikidiary.helpers.WikiHelper;
+import pl.maniak.wikidiary.helpers.WikiParser;
+import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
+import pl.maniak.wikidiary.models.WikiNote;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
 
@@ -140,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startSettings();
                 break;
             case R.id.nav_s_health:
+                getSHealthSteps();
                 break;
             case R.id.nav_time:
                 break;
@@ -156,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void sendMail() {
-        if(App.getInstance().getPrefBoolea(Constants.SEND_EMAIL_MESSAGE)) {
+        if (App.getInstance().getPrefBoolea(Constants.SEND_EMAIL_MESSAGE)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -233,10 +239,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 showError(event.getMessage());
                 break;
             case CommandEvent.SHOW_HEALTH_RESULT:
-//                if(this instanceof MainActivity) {
-//                    int steps = Integer.parseInt(event.getMessage());
-//                    ((MainActivity)this).putHealth(steps);
-//                }
+                int steps = Integer.parseInt(event.getMessage());
+                dbHelper.addWikiNote(new WikiNote(Constants.TAG_S_HEALTH, WikiParser.putHealth(steps), new Date()));
                 break;
 
         }
@@ -264,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } catch (Exception e) {
             Log.e("Maniak", "MainActivity.sendEmail() ", e);
-            App.postMessage(getString(R.string.email_failure)+"\nException: " + e.getMessage());
+            App.postMessage(getString(R.string.email_failure) + "\nException: " + e.getMessage());
         } finally {
             App.postEvent(CommandEvent.STOP);
         }
@@ -279,6 +283,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
+    private void getSHealthSteps() {
+
+        NumberKeyboardDialogFragment keyboardDialog = NumberKeyboardDialogFragment.newInstance("S Health");
+        keyboardDialog.show(getSupportFragmentManager(), "Number_Keybord");
+    }
+
+
 
          /*
    _____ _                     _____

@@ -1,0 +1,134 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_default"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+  <TextView
+      android:id="@+id/inputText"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:textSize="32dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberTableLl"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/padding_small"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/numberKey1"
+            style="@style/NumberKeyButton"
+            android:src="@drawable/ic_filter_1_24dp" />
+
+            <ImageView
+                android:id="@+id/numberKey2"
+            style="@style/NumberKeyButton"
+            android:src="@drawable/ic_filter_2_24dp" />
+
+            <ImageView
+                android:id="@+id/numberKey3"
+            style="@style/NumberKeyButton"
+            android:src="@drawable/ic_filter_3_24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/numberKey4"
+                style="@style/NumberKeyButton"
+                android:src="@drawable/ic_filter_4_24dp"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/numberKey5"
+                style="@style/NumberKeyButton"
+                android:src="@drawable/ic_filter_5_24dp"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/numberKey6"
+                style="@style/NumberKeyButton"
+                android:src="@drawable/ic_filter_6_24dp"
+                android:textSize="36sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/numberKey7"
+                style="@style/NumberKeyButton"
+                android:src="@drawable/ic_filter_7_24dp"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/numberKey8"
+                style="@style/NumberKeyButton"
+                android:src="@drawable/ic_filter_8_24dp"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/numberKey9"
+                style="@style/NumberKeyButton"
+                android:src="@drawable/ic_filter_9_24dp"
+                android:textSize="36sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/numberKeyDel"
+                style="@style/NumberKeyButton"
+                android:src="@drawable/ic_undo_24dp"
+                android:textSize="36sp"
+                android:longClickable="false"
+                android:focusableInTouchMode="true"
+                android:focusable="false" />
+
+            <ImageView
+                android:id="@+id/numberKey0"
+                style="@style/NumberKeyButton"
+                android:src="@drawable/ic_exposure_zero_24dp"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/numberKeyAccept"
+                style="@style/NumberKeyButton"
+                android:textSize="36sp"
+                android:src="@drawable/ic_done_24dp"
+                android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

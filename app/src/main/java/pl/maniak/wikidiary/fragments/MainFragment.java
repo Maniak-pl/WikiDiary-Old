@@ -114,6 +114,8 @@ public class MainFragment extends Fragment {
         }
     }
 
+
+
     private void showDatePicker() {
         DatePickerDialog datePickerDialog = getPickerDialog();
         datePickerDialog.setCancelable(false);

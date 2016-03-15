@@ -18,4 +18,6 @@ public class Constants {
     public static final String SEND_EMAIL_TO = "send_email_to";
     public static final String SEND_EMAIL_PASSWORD = "send_email_password";
     public static final String SEND_EMAIL_TITLE = "send_email_title";
+
+    public static final String TAG_S_HEALTH = "S Health";
 }

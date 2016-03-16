@@ -3,7 +3,9 @@ package pl.maniak.wikidiary.fragments;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +24,17 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
+import pl.maniak.wikidiary.Constants;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.db.DBHelper;
+import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.helpers.DateHelper;
+import pl.maniak.wikidiary.helpers.WikiParser;
 import pl.maniak.wikidiary.models.Tag;
 import pl.maniak.wikidiary.models.WikiNote;
+import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.views.FlowLayout;
 
 /**
@@ -81,7 +88,18 @@ public class MainFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        L.i("onPause: ");
+        EventBus.getDefault().unregister(this);
+    }
 
     private void initTagContener() {
         mFlowLayout.removeAllViews();
@@ -168,8 +186,26 @@ public class MainFragment extends Fragment {
 
     };
 
+    public void setEditText(String note) {
+        if(mEditText!=null) {
+            mEditText.setText(note);
+        }
+    }
+
     @OnClick(R.id.changeDateNote)
     public void onClick() {
         showDatePicker();
+    }
+
+    public void onEventMainThread(CommandEvent event) {
+        L.w("BaseActivity.onEventMainThread() called with " + "syncEvent = [" + event.getStatus() + "]");
+
+        switch (event.getStatus()) {
+            case CommandEvent.SHOW_VOICE_NOTE:
+                final String note = event.getMessage();
+
+                setEditText(note);
+
+        }
     }
 }

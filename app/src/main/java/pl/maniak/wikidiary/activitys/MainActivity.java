@@ -1,9 +1,12 @@
 package pl.maniak.wikidiary.activitys;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -21,6 +24,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -37,25 +41,16 @@ import pl.maniak.wikidiary.fragments.SettingsFragment;
 import pl.maniak.wikidiary.helpers.WikiHelper;
 import pl.maniak.wikidiary.helpers.WikiParser;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
+import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.models.WikiNote;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+    private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     @Inject
     public DBHelper dbHelper;
@@ -136,20 +131,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
-            case R.id.nav_main:
-                mViewPager.setCurrentItem(0);
-            case R.id.nav_code_generation:
-                mViewPager.setCurrentItem(1);
-                break;
             case R.id.nav_settings:
                 startSettings();
                 break;
             case R.id.nav_s_health:
-                getSHealthSteps();
+                startSHealthDialog();
                 break;
             case R.id.nav_time:
                 break;
             case R.id.nav_mic:
+                startVoiceRecognitionDialog();
                 break;
             case R.id.nav_send:
                 sendMail();
@@ -242,6 +233,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int steps = Integer.parseInt(event.getMessage());
                 dbHelper.addWikiNote(new WikiNote(Constants.TAG_S_HEALTH, WikiParser.putHealth(steps), new Date()));
                 break;
+            case CommandEvent.SHOW_VOICE_RESULT:
+                final String note = event.getMessage();
+                mViewPager.setCurrentItem(0);
+
+                App.postEvent(CommandEvent.SHOW_VOICE_NOTE, note);
+                break;
 
         }
     }
@@ -284,10 +281,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void getSHealthSteps() {
+    private void startSHealthDialog() {
 
         NumberKeyboardDialogFragment keyboardDialog = NumberKeyboardDialogFragment.newInstance("S Health");
         keyboardDialog.show(getSupportFragmentManager(), "Number_Keybord");
+    }
+
+
+
+    public void startVoiceRecognitionDialog() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                "Wprowadź notatkę");
+        startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Fill the list view with the strings the recognizer thought it
+            // could have heard
+            ArrayList matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+            VoiceNoteDialogFragment voiceNoteDialogFragment = VoiceNoteDialogFragment.newInstance(matches);
+            voiceNoteDialogFragment.show(getSupportFragmentManager(), "VoiceNote");
+
+        }
     }
 
 

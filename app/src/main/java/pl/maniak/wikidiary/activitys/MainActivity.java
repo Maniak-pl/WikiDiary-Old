@@ -91,14 +91,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         EventBus.getDefault().register(this);
     }
 
+
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         EventBus.getDefault().unregister(this);
     }
 
@@ -236,6 +237,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case CommandEvent.SHOW_VOICE:
                 startVoiceRecognitionDialog();
                 break;
+            case CommandEvent.SHOW_HEALTH:
+                startSHealthDialog();
+                break;
             case CommandEvent.SHOW_VOICE_RESULT:
                 final String note = event.getMessage();
                 mViewPager.setCurrentItem(0);
@@ -285,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void startSHealthDialog() {
-
+        L.d("startSHealthDialog: ");
         NumberKeyboardDialogFragment keyboardDialog = NumberKeyboardDialogFragment.newInstance("S Health");
         keyboardDialog.show(getSupportFragmentManager(), "Number_Keybord");
     }
@@ -293,6 +297,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void startVoiceRecognitionDialog() {
+        L.d( "startVoiceRecognitionDialog: ");
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);

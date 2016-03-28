@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/modal_dialog_bg">
+
+        <TextView
+            android:id="@+id/commandHeaderTv"
+            style="@style/ModalHeader"
+            android:text="Szybkie polecenia"
+            android:layout_width="match_parent"
+            />
+
+        <TableLayout
+            android:layout_below="@id/commandHeaderTv"
+            android:padding="@dimen/padding_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/commandMicBtn"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_menu_mic"/>
+
+                <ImageButton
+                    android:id="@+id/commandHealthBtn"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_menu_s_health"/>
+
+            </TableRow>
+
+
+
+        </TableLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

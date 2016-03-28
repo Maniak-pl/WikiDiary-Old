@@ -24,7 +24,7 @@ import pl.maniak.wikidiary.views.NumberKeyboardView;
 /**
  * Created by Sony on 2016-01-17.
  */
-public class VoiceNoteDialogFragment extends DialogFragment implements NumberKeyboardView.NumberKeyboardEventListener {
+public class VoiceNoteDialogFragment extends DialogFragment {
 
     private static final String VOICE_STRING_LIST = "VOICE_STRING_LIST";
 
@@ -85,27 +85,5 @@ public class VoiceNoteDialogFragment extends DialogFragment implements NumberKey
             super.show(manager, tag);
         }
     }
-
-
-    @Override
-    public void onNumberTextChanged(String numberString) {
-
-    }
-
-    @Override
-    public void onMaxNumberReached() {
-
-    }
-
-    @Override
-    public void onAcceptBtnClicked() {
-//
-    }
-
-    @Override
-    public void onNumberKeyboardReset() {
-
-    }
-
 
 }

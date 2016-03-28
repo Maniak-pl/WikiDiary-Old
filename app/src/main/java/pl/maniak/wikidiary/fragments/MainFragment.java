@@ -32,6 +32,8 @@ import pl.maniak.wikidiary.db.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.helpers.DateHelper;
 import pl.maniak.wikidiary.helpers.WikiParser;
+import pl.maniak.wikidiary.modals.CommandDialogFragment;
+import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.models.Tag;
 import pl.maniak.wikidiary.models.WikiNote;
 import pl.maniak.wikidiary.utils.L;
@@ -123,6 +125,29 @@ public class MainFragment extends Fragment {
             });
             mFlowLayout.addView(tv);
         }
+        initFunctionTag();
+        mFlowLayout.invalidate();
+
+    }
+
+    private void initFunctionTag() {
+        mFlowLayout.addView(getFuntionView(Constants.F_QUICK_COMMANDS, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startQuickCommands();
+            }
+        }));
+
+    }
+
+    private View getFuntionView(String title, View.OnClickListener listener) {
+        TextView tv = (TextView) getActivity().getLayoutInflater().inflate(R.layout.function_tag_item, null);
+        tv.setText(title);
+        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(10, 10, 10, 10);
+        tv.setLayoutParams(params);
+        tv.setOnClickListener(listener);
+        return tv;
     }
 
     private void addWikiNote(String tag) {
@@ -207,5 +232,10 @@ public class MainFragment extends Fragment {
                 setEditText(note);
 
         }
+    }
+
+    private void startQuickCommands(){
+        CommandDialogFragment fragment = CommandDialogFragment.newInstance();
+        fragment.show(getFragmentManager(), "QuickCommands");
     }
 }

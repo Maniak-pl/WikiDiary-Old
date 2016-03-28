@@ -20,4 +20,6 @@ public class Constants {
     public static final String SEND_EMAIL_TITLE = "send_email_title";
 
     public static final String TAG_S_HEALTH = "S Health";
+
+    public final static String F_QUICK_COMMANDS = "Commands";
 }

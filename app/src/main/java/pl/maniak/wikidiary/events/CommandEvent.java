@@ -13,8 +13,9 @@ public class CommandEvent {
     public static final int SHOW_ERROR = 20;
 
     public static final int SHOW_HEALTH_RESULT = 30;
-    public static final int SHOW_VOICE_RESULT = 31;
+    public static final int SHOW_VOICE = 31;
     public static final int SHOW_VOICE_NOTE = 32;
+    public static final int SHOW_VOICE_RESULT = 33;
 
 
     private final String message;

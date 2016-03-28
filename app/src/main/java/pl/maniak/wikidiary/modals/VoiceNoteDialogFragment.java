@@ -1,25 +1,21 @@
 package pl.maniak.wikidiary.modals;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.events.CommandEvent;
@@ -34,6 +30,7 @@ public class VoiceNoteDialogFragment extends DialogFragment implements NumberKey
 
     ListView mVoiceNotelist;
     ArrayList mListNote = new ArrayList();
+    Button tryAgainBtn;
 
     public static VoiceNoteDialogFragment newInstance(ArrayList<String> list) {
 
@@ -57,6 +54,14 @@ public class VoiceNoteDialogFragment extends DialogFragment implements NumberKey
         mVoiceNotelist = (ListView) view.findViewById(R.id.voiceNotelist);
 
         mListNote = getArguments().getStringArrayList(VOICE_STRING_LIST);
+        tryAgainBtn = (Button) view.findViewById(R.id.voiceTryAgain);
+        tryAgainBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                App.postEvent(CommandEvent.SHOW_VOICE);
+                dismiss();
+            }
+        });
         mVoiceNotelist.setAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mListNote));
         mVoiceNotelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,8 +85,6 @@ public class VoiceNoteDialogFragment extends DialogFragment implements NumberKey
             super.show(manager, tag);
         }
     }
-
-
 
 
     @Override

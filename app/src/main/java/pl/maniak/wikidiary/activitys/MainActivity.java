@@ -233,6 +233,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int steps = Integer.parseInt(event.getMessage());
                 dbHelper.addWikiNote(new WikiNote(Constants.TAG_S_HEALTH, WikiParser.putHealth(steps), new Date()));
                 break;
+            case CommandEvent.SHOW_VOICE:
+                startVoiceRecognitionDialog();
+                break;
             case CommandEvent.SHOW_VOICE_RESULT:
                 final String note = event.getMessage();
                 mViewPager.setCurrentItem(0);

@@ -67,7 +67,7 @@ public class CommandDialogFragment extends DialogFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.commandMicBtn, R.id.commandHealthBtn})
+    @OnClick({R.id.commandMicBtn, R.id.commandHealthBtn, R.id.commandAddTagBtn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.commandHealthBtn:
@@ -75,6 +75,9 @@ public class CommandDialogFragment extends DialogFragment {
                 break;
             case R.id.commandMicBtn:
                 App.postEvent(CommandEvent.SHOW_VOICE);
+                break;
+            case R.id.commandAddTagBtn:
+                App.postEvent(CommandEvent.SHOW_ADD_TAG);
                 break;
         }
         dismiss();

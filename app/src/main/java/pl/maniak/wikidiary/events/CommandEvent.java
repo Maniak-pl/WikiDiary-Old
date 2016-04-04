@@ -9,6 +9,7 @@ public class CommandEvent {
     public static final int STOP = 3;
 
     public static final int CLEAR = 10;
+    public static final int REFRESH = 11;
 
     public static final int SHOW_ERROR = 20;
 
@@ -21,6 +22,7 @@ public class CommandEvent {
 
     public static final int SHOW_VOICE = 50;
     public static final int SHOW_HEALTH = 51;
+    public static final int SHOW_ADD_TAG = 52;
 
 
     private final String message;

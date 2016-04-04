@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -230,8 +231,18 @@ public class MainFragment extends Fragment {
                 final String note = event.getMessage();
 
                 setEditText(note);
+                break;
+            case CommandEvent.REFRESH:
+                reload();
+                break;
 
         }
+    }
+
+    private void reload() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+
     }
 
     private void startQuickCommands(){

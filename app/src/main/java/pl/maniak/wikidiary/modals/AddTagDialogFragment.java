@@ -1,13 +1,16 @@
-package pl.maniak.wikidiary.fragments;
+package pl.maniak.wikidiary.modals;
 
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,18 +28,17 @@ import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.db.DBHelper;
+import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.models.Tag;
 import pl.maniak.wikidiary.views.FlowLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class SettingsFragment extends Fragment {
+
+public class AddTagDialogFragment extends DialogFragment {
 
     @Bind(R.id.addTagEt)
     EditText addTagEt;
     @Bind(R.id.settingsContainerTags)
-    pl.maniak.wikidiary.views.FlowLayout mFlowLayout;
+    FlowLayout mFlowLayout;
 
     private Set<Tag> setTag = new TreeSet<Tag>();
 
@@ -46,30 +48,43 @@ public class SettingsFragment extends Fragment {
     @Inject
     SharedPreferences preferences;
 
-    public static SettingsFragment newInstance() {
+
+
+    public static AddTagDialogFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        SettingsFragment fragment = new SettingsFragment();
+        AddTagDialogFragment fragment = new AddTagDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public SettingsFragment() {
+    public AddTagDialogFragment() {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_add_tag_modal, null);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        super.onCreateDialog(savedInstanceState);
+
+        LayoutInflater i = getActivity().getLayoutInflater();
+        View view = i.inflate(R.layout.fragment_add_tag_modal, null);
+
+        ButterKnife.bind(this, view);
         App.getComponent().inject(this);
-        ButterKnife.bind(this, root);
+        ButterKnife.bind(this, view);
         setTag.addAll(loadTag());
 
-        return root;
+        Dialog alertDialog = new Dialog(getActivity());
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(view);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        return alertDialog;
     }
+
+
+
 
     @Override
     public void onStart() {
@@ -94,10 +109,13 @@ public class SettingsFragment extends Fragment {
     }
 
     private void reload() {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
+        App.postEvent(CommandEvent.REFRESH);
+        dismiss();
 
     }
+
+
+
 
     private void initTagContener() {
         mFlowLayout.removeAllViews();

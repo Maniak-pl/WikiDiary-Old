@@ -12,6 +12,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +41,7 @@ import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
 import pl.maniak.wikidiary.fragments.SettingsFragment;
 import pl.maniak.wikidiary.helpers.WikiHelper;
 import pl.maniak.wikidiary.helpers.WikiParser;
+import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
 import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.models.WikiNote;
@@ -146,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_send:
                 sendMail();
                 break;
+            case R.id.nav_add_tag:
+                showAddTagDialog();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -240,6 +245,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case CommandEvent.SHOW_HEALTH:
                 startSHealthDialog();
                 break;
+            case CommandEvent.SHOW_ADD_TAG:
+                showAddTagDialog();
+                break;
             case CommandEvent.SHOW_VOICE_RESULT:
                 final String note = event.getMessage();
                 mViewPager.setCurrentItem(0);
@@ -289,15 +297,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void startSHealthDialog() {
-        L.d("startSHealthDialog: ");
         NumberKeyboardDialogFragment keyboardDialog = NumberKeyboardDialogFragment.newInstance("S Health");
         keyboardDialog.show(getSupportFragmentManager(), "Number_Keybord");
+    }
+
+    private void showAddTagDialog() {
+        AddTagDialogFragment fragment = AddTagDialogFragment.newInstance();
+        fragment.show(getSupportFragmentManager(), "Add Tag");
     }
 
 
 
     public void startVoiceRecognitionDialog() {
-        L.d( "startVoiceRecognitionDialog: ");
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -320,6 +331,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
     }
+
+
 
 
 

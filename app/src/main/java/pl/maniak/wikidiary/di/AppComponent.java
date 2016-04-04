@@ -8,6 +8,7 @@ import pl.maniak.wikidiary.activitys.MainActivity;
 import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
 import pl.maniak.wikidiary.fragments.SettingsFragment;
+import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 
 /**
  * Created by Maniak on 2016-02-25.
@@ -24,4 +25,6 @@ public interface AppComponent {
     void inject(MainFragment mainFragment);
 
     void inject(MainActivity mainActivity);
+
+    void inject(AddTagDialogFragment addTagDialogFragment);
 }

@@ -29,7 +29,7 @@ android:background="@color/transparent">
                 android:layout_height="wrap_content"
                 android:layout_weight=".9"
                 android:hint="Add Tag"
-                android:maxLength="20"
+                android:maxLength="50"
                 />
             <ImageView
                 android:id="@+id/addTagBtn"

@@ -27,10 +27,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
+import info.talacha.filmweb.api.FilmwebApi;
+import info.talacha.filmweb.search.models.FilmSearchResult;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.Constants;
 import pl.maniak.wikidiary.R;
@@ -96,7 +99,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+//        testFilmWebApi();
     }
+
+//    private void testFilmWebApi() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                FilmwebApi fa = new FilmwebApi();
+//                List<FilmSearchResult> filmInfoList = fa.getFilmList("X-Men Geneza");
+//
+//                for (FilmSearchResult film : filmInfoList) {
+//
+//                    /**
+//                     * Możemy przejrzeć dane z wyszukiwarki...
+//                     */
+//                    L.e("run: "
+////                          +  "\ngetId: "+        film.getId()           // ID filmu
+//                    +  "\ngetTitle: "+ film.getTitle()        // Tytuł filmu
+//                    +  "\ngetPolishTitle: "+ film.getPolishTitle()  // Polski tytuł
+////                    +  "\ngetImageURL: "+ film.getImageURL()     // Adres URL plakatu
+//                    +  "\ngetDescriptions: "+ fa.getDescriptions(film.getId())     // Adres URL plakatu
+//                    );
+//
+//                }
+//            }
+//        }).start();
+//    }
 
 
     @Override

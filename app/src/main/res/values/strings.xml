@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WikiDiary</string>
     <string name="action_settings">Settings</string>
+    <string name="action_todo">ToDo</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -21,5 +22,6 @@
     <string name="email_failure">Set up an account in Settings</string>
     <string name="email_successfully"> Email was sent successfully.</string>
     <string name="turn_on_mail">Turn on an email in settings</string>
+
 
 </resources>

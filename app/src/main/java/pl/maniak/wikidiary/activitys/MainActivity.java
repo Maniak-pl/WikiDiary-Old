@@ -48,6 +48,7 @@ import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
 import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.models.WikiNote;
+import pl.maniak.wikidiary.section.todo.ToDoActivity;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
 
@@ -149,10 +150,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            startSettings();
-            return true;
+        switch (id) {
+            case R.id.action_settings:
+                startSettings();
+                return true;
+            case R.id.action_todo:
+                startToDo();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -323,6 +327,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void startSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void startToDo() {
+        Intent intent = new Intent(this, ToDoActivity.class);
         startActivity(intent);
     }
 

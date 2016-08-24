@@ -26,8 +26,11 @@
 
         <activity android:name=".activitys.SettingsActivity"
             android:screenOrientation="portrait">
-
         </activity>
+        <activity android:name=".section.todo.ToDoActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>

@@ -27,7 +27,7 @@
         <activity android:name=".activitys.SettingsActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".section.todo.ToDoActivity"
+        <activity android:name=".section.todo.TodoActivity"
             android:screenOrientation="portrait">
         </activity>
 

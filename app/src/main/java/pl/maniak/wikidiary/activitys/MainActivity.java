@@ -5,14 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -27,13 +25,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
-import info.talacha.filmweb.api.FilmwebApi;
-import info.talacha.filmweb.search.models.FilmSearchResult;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.Constants;
 import pl.maniak.wikidiary.R;
@@ -48,7 +43,7 @@ import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
 import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.models.WikiNote;
-import pl.maniak.wikidiary.section.todo.ToDoActivity;
+import pl.maniak.wikidiary.section.todo.TodoActivity;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
 
@@ -331,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void startToDo() {
-        Intent intent = new Intent(this, ToDoActivity.class);
+        Intent intent = new Intent(this, TodoActivity.class);
         startActivity(intent);
     }
 

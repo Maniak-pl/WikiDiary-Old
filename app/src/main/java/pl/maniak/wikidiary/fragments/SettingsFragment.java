@@ -19,7 +19,7 @@ import java.util.TreeSet;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
@@ -33,9 +33,9 @@ import pl.maniak.wikidiary.views.FlowLayout;
  */
 public class SettingsFragment extends Fragment {
 
-    @Bind(R.id.addTagEt)
+    @BindView(R.id.addTagEt)
     EditText addTagEt;
-    @Bind(R.id.settingsContainerTags)
+    @BindView(R.id.settingsContainerTags)
     pl.maniak.wikidiary.views.FlowLayout mFlowLayout;
 
     private Set<Tag> setTag = new TreeSet<Tag>();
@@ -75,12 +75,6 @@ public class SettingsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         initTagContener();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
 

@@ -60,13 +60,6 @@ public class CommandDialogFragment extends DialogFragment {
         }
     }
 
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
     @OnClick({R.id.commandMicBtn, R.id.commandHealthBtn, R.id.commandAddTagBtn})
     public void onClick(View view) {
         switch (view.getId()) {

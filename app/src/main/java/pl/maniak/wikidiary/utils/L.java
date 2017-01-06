@@ -2,8 +2,6 @@ package pl.maniak.wikidiary.utils;
 
 import android.util.Log;
 
-import pl.maniak.wikidiary.Constants;
-
 
 /**
  * Created by Maniak on 2015-10-22.

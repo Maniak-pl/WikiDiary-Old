@@ -17,7 +17,7 @@ import android.widget.EditText;
 
 import java.util.List;
 
-import pl.maniak.wikidiary.Constants;
+import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.R;
 
 

@@ -30,7 +30,7 @@ import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
-import pl.maniak.wikidiary.Constants;
+import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.db.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;

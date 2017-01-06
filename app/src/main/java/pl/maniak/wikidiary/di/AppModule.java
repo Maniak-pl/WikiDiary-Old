@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.maniak.wikidiary.Constants;
+import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.db.DBHelper;
 
 /**

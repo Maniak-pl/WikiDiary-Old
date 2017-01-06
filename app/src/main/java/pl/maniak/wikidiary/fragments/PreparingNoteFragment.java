@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
@@ -21,7 +21,7 @@ import pl.maniak.wikidiary.helpers.WikiHelper;
  */
 public class PreparingNoteFragment extends Fragment {
 
-    @Bind(R.id.preparingNotePage)
+    @BindView(R.id.preparingNotePage)
     TextView mPage;
 
     @Inject
@@ -55,16 +55,5 @@ public class PreparingNoteFragment extends Fragment {
             mPage.setText(WikiHelper.preparingEntryOnWiki(dbHelper.getWikiNotes()));
         }
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-
-
-
-
 
 }

@@ -3,10 +3,8 @@ package pl.maniak.wikidiary.fragments;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,21 +20,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
-import pl.maniak.wikidiary.Constants;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.db.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.helpers.DateHelper;
-import pl.maniak.wikidiary.helpers.WikiParser;
 import pl.maniak.wikidiary.modals.CommandDialogFragment;
-import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.models.Tag;
 import pl.maniak.wikidiary.models.WikiNote;
+import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.views.FlowLayout;
 
@@ -46,11 +42,11 @@ import pl.maniak.wikidiary.views.FlowLayout;
 public class MainFragment extends Fragment {
 
 
-    @Bind(R.id.editText)
+    @BindView(R.id.editText)
     EditText mEditText;
-    @Bind(R.id.numberOfDayTv)
+    @BindView(R.id.numberOfDayTv)
     TextView numberOfDayTv;
-    @Bind(R.id.containerTags)
+    @BindView(R.id.containerTags)
     FlowLayout mFlowLayout;
 
     @Inject
@@ -85,11 +81,6 @@ public class MainFragment extends Fragment {
         initTagContener();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 
     @Override
     public void onResume() {

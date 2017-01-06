@@ -1,16 +1,20 @@
-package pl.maniak.wikidiary;
+package pl.maniak.wikidiary.utils;
+
+import pl.maniak.wikidiary.BuildConfig;
 
 /**
  * Created by maniak on 01.03.16.
  */
-public class Constants {
+public interface Constants {
 
-    public final static boolean DEBUG_LOG = true;
+    boolean DEBUG_LOG = true;
+    String API_BASE_URL = "";
+
 
     // PREFERENCES
-    public static final String PREFERENCES_NAME = "myPreferences";
-    public final static String PREF_TAG_SIZE = "tag_size";
-    public final static String PREF_TAG = "tag_";
+    String PREFERENCES_NAME = "myPreferences";
+    String PREF_TAG_SIZE = "tag_size";
+    String PREF_TAG = "tag_";
 
 
     public static final String SEND_EMAIL_MESSAGE = "send_email_message";

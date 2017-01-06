@@ -64,7 +64,7 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_add_tag_modal, null);
-        App.getComponent().inject(this);
+        App.getAppComponent().inject(this);
         ButterKnife.bind(this, root);
         setTag.addAll(loadTag());
 

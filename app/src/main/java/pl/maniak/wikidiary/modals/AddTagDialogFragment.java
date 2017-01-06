@@ -71,7 +71,7 @@ public class AddTagDialogFragment extends DialogFragment {
         View view = i.inflate(R.layout.fragment_add_tag_modal, null);
 
         ButterKnife.bind(this, view);
-        App.getComponent().inject(this);
+        App.getAppComponent().inject(this);
         ButterKnife.bind(this, view);
         setTag.addAll(loadTag());
 

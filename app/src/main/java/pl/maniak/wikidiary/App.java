@@ -38,7 +38,7 @@ public class App extends Application {
         return instance;
     }
 
-    public static AppComponent getComponent() {
+    public static AppComponent getAppComponent() {
         return appComponent;
     }
 

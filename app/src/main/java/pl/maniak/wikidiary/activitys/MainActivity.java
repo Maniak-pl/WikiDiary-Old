@@ -40,7 +40,7 @@ import pl.maniak.wikidiary.helpers.WikiParser;
 import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
 import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
-import pl.maniak.wikidiary.models.WikiNote;
+import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;

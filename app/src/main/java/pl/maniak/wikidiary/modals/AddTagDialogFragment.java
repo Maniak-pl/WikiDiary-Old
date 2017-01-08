@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -30,7 +29,7 @@ import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.db.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
-import pl.maniak.wikidiary.models.Tag;
+import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.views.FlowLayout;
 
 

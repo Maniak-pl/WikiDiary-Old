@@ -1,11 +1,5 @@
 package pl.maniak.wikidiary.helpers;
 
-import java.util.Date;
-
-import pl.maniak.wikidiary.App;
-import pl.maniak.wikidiary.models.WikiNote;
-import pl.maniak.wikidiary.utils.L;
-
 /**
  * Created by maniak on 02.03.16.
  */

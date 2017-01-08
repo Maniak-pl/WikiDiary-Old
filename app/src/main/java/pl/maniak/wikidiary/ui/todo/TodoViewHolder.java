@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lombok.Setter;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.models.Task;
+import pl.maniak.wikidiary.domain.todo.Task;
 
 public class TodoViewHolder  extends RecyclerView.ViewHolder {
 

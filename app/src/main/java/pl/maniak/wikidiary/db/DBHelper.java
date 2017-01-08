@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.maniak.wikidiary.models.Tag;
-import pl.maniak.wikidiary.models.WikiNote;
+import pl.maniak.wikidiary.domain.tag.Tag;
+import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.utils.L;
 
 /**

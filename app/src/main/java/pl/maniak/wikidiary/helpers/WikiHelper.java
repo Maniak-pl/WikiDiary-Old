@@ -1,11 +1,14 @@
 package pl.maniak.wikidiary.helpers;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import pl.maniak.wikidiary.models.WikiNote;
+import pl.maniak.wikidiary.domain.wikinote.WikiNote;
+import pl.maniak.wikidiary.utils.L;
 
 /**
  * Created by maniak on 11.03.16.

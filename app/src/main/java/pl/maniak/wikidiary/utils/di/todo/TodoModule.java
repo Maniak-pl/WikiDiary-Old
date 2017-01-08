@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import dagger.Module;
 import dagger.Provides;
 import lombok.RequiredArgsConstructor;
-import pl.maniak.wikidiary.api.TodoDBHelper;
-import pl.maniak.wikidiary.api.TodoRepository;
-import pl.maniak.wikidiary.models.Task;
+import pl.maniak.wikidiary.data.TodoDBHelper;
+import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCase;
+import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCaseImpl;
+import pl.maniak.wikidiary.domain.todo.repository.TodoRepository;
+import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
 import pl.maniak.wikidiary.ui.todo.TodoContract;
 import pl.maniak.wikidiary.ui.todo.TodoPresenter;
 import pl.maniak.wikidiary.ui.todo.TodoRecyclerViewAdapter;
-import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.ObservableList;
 import pl.maniak.wikidiary.utils.ObservableListImpl;
 
@@ -31,8 +32,8 @@ public class TodoModule {
     }
 
     @Provides
-    TodoContract.Presenter providePresenter(ObservableList<Task> observableList, TodoRepository repository) {
-        return new TodoPresenter(observableList, repository);
+    TodoContract.Presenter providePresenter(ObservableList<Task> observableList, TodoUseCase useCase) {
+        return new TodoPresenter(observableList, useCase);
     }
 
     @Provides
@@ -50,6 +51,11 @@ public class TodoModule {
     @Provides
     TodoRepository provideRepository(){
         return new TodoDBHelper(activity);
+    }
+
+    @Provides
+    TodoUseCase provideUseCase(TodoRepository repository) {
+        return new TodoUseCaseImpl(repository);
     }
 
 }

@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.helpers.DateHelper;
-import pl.maniak.wikidiary.models.Task;
+import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.ui.BaseActivity;
 import pl.maniak.wikidiary.utils.di.todo.DaggerTodoComponent;
 import pl.maniak.wikidiary.utils.di.todo.TodoModule;

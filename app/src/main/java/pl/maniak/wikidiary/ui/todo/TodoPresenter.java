@@ -1,8 +1,8 @@
 package pl.maniak.wikidiary.ui.todo;
 
 import lombok.RequiredArgsConstructor;
-import pl.maniak.wikidiary.api.TodoRepository;
-import pl.maniak.wikidiary.models.Task;
+import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCase;
+import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.utils.ObservableList;
 import rx.schedulers.Schedulers;
 
@@ -10,7 +10,7 @@ import rx.schedulers.Schedulers;
 public class TodoPresenter implements TodoContract.Presenter {
 
     private final ObservableList<Task> tasks;
-    private final TodoRepository repository;
+    private final TodoUseCase useCase;
     private Long currentTaskId;
 
     private TodoContract.View view;
@@ -34,7 +34,7 @@ public class TodoPresenter implements TodoContract.Presenter {
 
     private void updateTasks() {
         clearTasks();
-        tasks.addAll(repository.getTasks());
+        tasks.addAll(useCase.getAllTasks());
     }
 
     private void clearTasks() {
@@ -65,19 +65,19 @@ public class TodoPresenter implements TodoContract.Presenter {
     @Override
     public void onEditTaskOptionClicked() {
         if(view != null) {
-            view.showEditTaskEditor(repository.getTask(currentTaskId));
+            view.showEditTaskEditor(useCase.getTask(currentTaskId));
         }
     }
 
     @Override
     public void onDeleteTaskOptionClicked() {
-        repository.delete(currentTaskId);
+        useCase.delete(currentTaskId);
         updateTasks();
     }
 
     @Override
     public void onCommitButtonClicked(Task task) {
-        repository.save(task);
+        useCase.save(task);
         updateTasks();
     }
 

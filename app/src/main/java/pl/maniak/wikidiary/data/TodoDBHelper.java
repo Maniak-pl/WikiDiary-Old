@@ -1,12 +1,10 @@
-package pl.maniak.wikidiary.api;
+package pl.maniak.wikidiary.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -14,9 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.maniak.wikidiary.db.DBHelper;
-import pl.maniak.wikidiary.models.Tag;
-import pl.maniak.wikidiary.models.Task;
+import pl.maniak.wikidiary.domain.todo.Task;
+import pl.maniak.wikidiary.domain.todo.repository.TodoRepository;
 import pl.maniak.wikidiary.utils.L;
 
 public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoRepository {
@@ -62,18 +59,18 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
     }
 
     @Override
-    public Task getTask(Long id) {
+    public Task getTaskById(Long id) {
         Task task = new Task();
         try {
             task = getDao().queryForId(id);
         } catch (SQLException e) {
-            L.e("TodoDBHelper.getTask()", e);
+            L.e("TodoDBHelper.getTaskById()", e);
         }
         return task;
     }
 
     @Override
-    public void save(Task task) {
+    public void saveTask(Task task) {
         try {
             getDao().createOrUpdate(task);
         } catch (SQLException e) {
@@ -82,20 +79,20 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteTaskById(Long id) {
         try {
             dao.deleteById(id);
         } catch (SQLException e) {
-            L.e("TodoDBHelper.delete()", e);
+            L.e("TodoDBHelper.deleteTaskById()", e);
         }
     }
 
-    public List<Task> getTasks() {
+    public List<Task> getAllTasks() {
         List<Task> list = new ArrayList();
         try {
             list = getDao().queryForAll();
         } catch (SQLException e) {
-            L.e("TodoDBHelper.getTasks()", e);
+            L.e("TodoDBHelper.getAllTasks()", e);
         }
         return list;
     }

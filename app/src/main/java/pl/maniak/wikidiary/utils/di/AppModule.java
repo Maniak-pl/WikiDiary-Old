@@ -8,8 +8,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.maniak.wikidiary.api.TodoDBHelper;
-import pl.maniak.wikidiary.api.TodoRepository;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.db.DBHelper;
 

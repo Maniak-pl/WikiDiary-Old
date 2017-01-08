@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.models;
+package pl.maniak.wikidiary.domain.tag;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

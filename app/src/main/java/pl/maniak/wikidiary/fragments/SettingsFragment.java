@@ -25,7 +25,7 @@ import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.db.DBHelper;
-import pl.maniak.wikidiary.models.Tag;
+import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.views.FlowLayout;
 
 /**

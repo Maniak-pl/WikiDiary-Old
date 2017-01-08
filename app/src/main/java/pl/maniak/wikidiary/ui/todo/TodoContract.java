@@ -2,7 +2,7 @@ package pl.maniak.wikidiary.ui.todo;
 
 import java.util.List;
 
-import pl.maniak.wikidiary.models.Task;
+import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.ui.BaseContract;
 
 public interface TodoContract {

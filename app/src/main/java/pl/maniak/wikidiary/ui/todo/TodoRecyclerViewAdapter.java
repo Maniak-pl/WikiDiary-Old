@@ -10,7 +10,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.models.Task;
+import pl.maniak.wikidiary.domain.todo.Task;
 
 @RequiredArgsConstructor
 public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<TodoViewHolder> {

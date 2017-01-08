@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.utils;
+package pl.maniak.wikidiary.utils.config;
 
 public interface Configuration {
     String getApiBaseUrl();

@@ -1,5 +1,6 @@
 package pl.maniak.wikidiary.utils.di.todo;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -8,11 +9,17 @@ import java.util.ArrayList;
 import dagger.Module;
 import dagger.Provides;
 import lombok.RequiredArgsConstructor;
-import pl.maniak.wikidiary.data.TodoDBHelper;
+import pl.maniak.wikidiary.App;
+import pl.maniak.wikidiary.data.TodoRepositoryImpl;
+import pl.maniak.wikidiary.domain.DBHelper;
 import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCase;
 import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCaseImpl;
 import pl.maniak.wikidiary.domain.todo.repository.TodoRepository;
 import pl.maniak.wikidiary.domain.todo.Task;
+import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUseCase;
+import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUserCaseImpl;
+import pl.maniak.wikidiary.domain.wikinote.repository.WikiNoteRepository;
+import pl.maniak.wikidiary.domain.wikinote.repository.datasource.WikiNoteRepositoryImpl;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
 import pl.maniak.wikidiary.ui.todo.TodoContract;
 import pl.maniak.wikidiary.ui.todo.TodoPresenter;
@@ -25,6 +32,11 @@ import pl.maniak.wikidiary.utils.ObservableListImpl;
 public class TodoModule {
 
     private final TodoActivity activity;
+
+    @Provides
+    Context provideContext() {
+        return activity.getBaseContext();
+    }
 
     @Provides
     ObservableList<Task> provideObservableList() {
@@ -49,13 +61,23 @@ public class TodoModule {
     }
 
     @Provides
-    TodoRepository provideRepository(){
-        return new TodoDBHelper(activity);
+    TodoRepository provideTodoRepository(){
+        return new TodoRepositoryImpl(activity);
     }
 
     @Provides
-    TodoUseCase provideUseCase(TodoRepository repository) {
-        return new TodoUseCaseImpl(repository);
+    TodoUseCase provideTodoUseCase(TodoRepository repository, WikiNoteUseCase useCase) {
+        return new TodoUseCaseImpl(repository, useCase);
+    }
+
+    @Provides
+    WikiNoteUseCase provideWikiNoteUseCase(WikiNoteRepository repository) {
+        return new WikiNoteUserCaseImpl(repository);
+    }
+
+    @Provides
+    WikiNoteRepository provideWikiNoteRepository() {
+        return new WikiNoteRepositoryImpl(App.getAppComponent().getDBHelper());
     }
 
 }

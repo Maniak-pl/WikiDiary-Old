@@ -16,14 +16,18 @@ public interface Constants {
     String PREF_TAG_SIZE = "tag_size";
     String PREF_TAG = "tag_";
 
+    // MAIL
+    String SEND_EMAIL_MESSAGE = "send_email_message";
+    String SEND_EMAIL_FROM = "send_email_from";
+    String SEND_EMAIL_TO = "send_email_to";
+    String SEND_EMAIL_PASSWORD = "send_email_password";
+    String SEND_EMAIL_TITLE = "send_email_title";
 
-    public static final String SEND_EMAIL_MESSAGE = "send_email_message";
-    public static final String SEND_EMAIL_FROM = "send_email_from";
-    public static final String SEND_EMAIL_TO = "send_email_to";
-    public static final String SEND_EMAIL_PASSWORD = "send_email_password";
-    public static final String SEND_EMAIL_TITLE = "send_email_title";
+    // TAG
+    String TAG_S_HEALTH = "S Health";
+    String TAG_TODO = "ToDo";
 
-    public static final String TAG_S_HEALTH = "S Health";
 
-    public final static String F_QUICK_COMMANDS = "Commands";
+
+   String F_QUICK_COMMANDS = "Commands";
 }

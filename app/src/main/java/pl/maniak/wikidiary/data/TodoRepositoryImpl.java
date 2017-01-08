@@ -16,7 +16,7 @@ import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.domain.todo.repository.TodoRepository;
 import pl.maniak.wikidiary.utils.L;
 
-public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoRepository {
+public class TodoRepositoryImpl extends OrmLiteSqliteOpenHelper implements TodoRepository {
 
     private static final String DATABASE_NAME = "todo-database";
     private static final int DATABASE_VERSION = 1;
@@ -24,9 +24,9 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
     private Dao<Task, Long> dao = null;
 
 
-    public TodoDBHelper(Context context) {
+    public TodoRepositoryImpl(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        L.e("TodoDBHelper() - Constructor");
+        L.e("TodoRepositoryImpl() - Constructor");
     }
 
     @Override
@@ -34,10 +34,10 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
         try {
 
             TableUtils.createTable(connectionSource, Task.class);
-            L.e("TodoDBHelper.onCreate()");
+            L.e("TodoRepositoryImpl.onCreate()");
 
         } catch (SQLException e) {
-            L.e("TodoDBHelper.onCreate()", e);
+            L.e("TodoRepositoryImpl.onCreate()", e);
         }
     }
 
@@ -47,7 +47,7 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
             TableUtils.dropTable(connectionSource, Task.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
-            L.e("TodoDBHelper.onUpgrade()", e);
+            L.e("TodoRepositoryImpl.onUpgrade()", e);
         }
     }
 
@@ -64,7 +64,7 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
         try {
             task = getDao().queryForId(id);
         } catch (SQLException e) {
-            L.e("TodoDBHelper.getTaskById()", e);
+            L.e("TodoRepositoryImpl.getTaskById()", e);
         }
         return task;
     }
@@ -74,7 +74,7 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
         try {
             getDao().createOrUpdate(task);
         } catch (SQLException e) {
-            L.e("TodoDBHelper.save()", e);
+            L.e("TodoRepositoryImpl.save()", e);
         }
     }
 
@@ -83,7 +83,7 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
         try {
             dao.deleteById(id);
         } catch (SQLException e) {
-            L.e("TodoDBHelper.deleteTaskById()", e);
+            L.e("TodoRepositoryImpl.deleteTaskById()", e);
         }
     }
 
@@ -92,7 +92,7 @@ public class TodoDBHelper extends OrmLiteSqliteOpenHelper implements TodoReposit
         try {
             list = getDao().queryForAll();
         } catch (SQLException e) {
-            L.e("TodoDBHelper.getAllTasks()", e);
+            L.e("TodoRepositoryImpl.getAllTasks()", e);
         }
         return list;
     }

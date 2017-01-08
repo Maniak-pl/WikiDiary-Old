@@ -26,7 +26,7 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.db.DBHelper;
+import pl.maniak.wikidiary.domain.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.helpers.DateHelper;
 import pl.maniak.wikidiary.modals.CommandDialogFragment;

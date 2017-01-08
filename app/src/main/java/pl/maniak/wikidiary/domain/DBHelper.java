@@ -1,7 +1,8 @@
-package pl.maniak.wikidiary.db;
+package pl.maniak.wikidiary.domain;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -13,13 +14,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.utils.L;
 
-/**
- * Created by Sony on 2015-10-22.
- */
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "wikidiary-database";
@@ -30,15 +31,15 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     private Dao<WikiNote, Long> wikiNoteDao = null;
     private Dao<Tag, Long> tagDao = null;
 
-
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        L.e( "DBHelper - Constructor" );
     }
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-
+            L.e("DBHelper.onCreate()");
             TableUtils.createTable(connectionSource, WikiNote.class);
             TableUtils.createTable(connectionSource, Tag.class);
 
@@ -50,6 +51,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
+            L.e("DBHelper.onUpgrade()");
             TableUtils.dropTable(connectionSource, WikiNote.class, true);
             TableUtils.dropTable(connectionSource, Tag.class, true);
             onCreate(database, connectionSource);
@@ -58,7 +60,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
-    public Dao<WikiNote, Long> getDao() throws SQLException {
+    public Dao<WikiNote, Long> getWikiNoteDao() throws SQLException {
         if (wikiNoteDao == null) {
             wikiNoteDao = getDao(WikiNote.class);
         }
@@ -100,7 +102,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public void addWikiNote(WikiNote wikiNote) {
         L.i("DBHelper.addWikiNote() called with " + "wikiNote = [" + wikiNote.toString() + "]");
         try {
-            getDao().createOrUpdate(wikiNote);
+            getWikiNoteDao().createOrUpdate(wikiNote);
         } catch (SQLException e) {
             L.e("DBHelper.addWikiNote()", e);
         }
@@ -109,7 +111,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public List<WikiNote> getWikiNotes() {
         List<WikiNote> list = new ArrayList();
         try {
-            list = getDao().queryForAll();
+            list = getWikiNoteDao().queryForAll();
         } catch (SQLException e) {
             L.e("DBHelper.getWikiNotes()", e);
         }
@@ -119,7 +121,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public List<WikiNote> getWikiNotesWithTag(String tag) {
         List<WikiNote> list = new ArrayList();
         try {
-            list = getDao().queryBuilder().where().eq("Tag", tag).query();
+            list = getWikiNoteDao().queryBuilder().where().eq("Tag", tag).query();
         } catch (SQLException e) {
             L.e("DBHelper.getWikiNotes()", e);
         }
@@ -130,7 +132,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         try {
             List<WikiNote> list = getWikiNotes();
             if (list != null && list.size() != 0) {
-                getDao().delete(getWikiNotes());
+                getWikiNoteDao().delete(getWikiNotes());
             } else {
                 L.d("Baza nie istnieje lub jest pusta ");
             }

@@ -25,7 +25,7 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         appComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(getApplicationContext()))
+                .appModule(new AppModule(this))
                 .build();
 
     }
@@ -37,10 +37,6 @@ public class App extends Application {
     public static AppComponent getAppComponent() {
         return appComponent;
     }
-
-
-
-
 
     public static void postMessage(int resMsg) {
         EventBus.getDefault().post(new CommandEvent(CommandEvent.SHOW_ERROR, App.getInstance().getString(resMsg)));

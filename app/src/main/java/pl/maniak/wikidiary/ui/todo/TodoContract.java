@@ -24,6 +24,7 @@ public interface TodoContract {
         void onTaskClicked(Task task);
         void onEditTaskOptionClicked();
         void onDeleteTaskOptionClicked();
-        void onCommitButtonClicked(Task task);
+        void onCommitNewTaskButtonClicked(Task task);
+        void onCommitEditTaskButtonClicked(Task task);
     }
 }

@@ -121,7 +121,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public List<WikiNote> getWikiNotesWithTag(String tag) {
         List<WikiNote> list = new ArrayList();
         try {
-            list = getWikiNoteDao().queryBuilder().where().eq("Tag", tag).query();
+            list = getWikiNoteDao().queryBuilder().where().eq("tag", tag).query();
         } catch (SQLException e) {
             L.e("DBHelper.getWikiNotes()", e);
         }

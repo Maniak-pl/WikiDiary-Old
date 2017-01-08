@@ -13,11 +13,11 @@ public class WikiNote {
     @DatabaseField(generatedId = true, allowGeneratedIdInsert = true)
     private long dbId;
     @DatabaseField
-    private String tag;
+    private String Tag;
     @DatabaseField
-    private String description;
+    private String Description;
     @DatabaseField
-    private java.util.Date date;
+    private java.util.Date Date;
     @DatabaseField
     private boolean isSend;
 
@@ -25,16 +25,16 @@ public class WikiNote {
     }
 
     public WikiNote(String tag, String description, java.util.Date date) {
-        this.tag = tag;
-        this.description = description;
-        this.date = date;
+        this.Tag = tag;
+        this.Description = description;
+        this.Date = date;
     }
 
     @Override
     public String toString() {
         return "WikiNote{" +
-                "Tag='" + tag + '\'' +
-                ", Description='" + description + '\'' +
+                "Tag='" + Tag + '\'' +
+                ", Description='" + Description + '\'' +
                 '}';
     }
 }

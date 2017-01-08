@@ -54,11 +54,8 @@ public class WikiParser {
 
         String img = "";
         if (steps >= 10000) {
-            img = "  {{ :wikidiary:s-health-samsung-logo.jpg?direct&200 |}}";
-        } else {
-            img = "  {{ :wikidiary:s-health-samsung-logo-fail.jpg?direct&200 |}}";
+            img = "  {{ :wikidiary:pictograms_-_walking_with_s-health.png?direct&200 |}}";
         }
-
          return ("Kroków " + steps + "/10000" + img);
     }
 }

@@ -2,6 +2,7 @@ package pl.maniak.wikidiary.utils.config;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
@@ -20,5 +21,10 @@ public class ResourceProviderImpl implements ResourceProvider {
     @Override
     public Drawable getDrawable(@DrawableRes int drawableResId) {
         return ContextCompat.getDrawable(appContext, drawableResId);
+    }
+
+    @Override
+    public int getColor(@ColorRes int colorResId) {
+        return ContextCompat.getColor(appContext, colorResId);
     }
 }

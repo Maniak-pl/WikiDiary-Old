@@ -7,6 +7,7 @@ import pl.maniak.wikidiary.domain.todo.Task;
 public interface TodoUseCase {
     Task getTask(Long id);
     List<Task> getAllTasks();
-    void save(Task todo);
+    void save(Task task);
+    void update(Task task);
     void delete(Long id);
 }

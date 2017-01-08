@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="82dp"
+              android:layout_margin="2dp"
+              android:orientation="vertical">
+
+
+
 
     <LinearLayout
         android:id="@+id/todo_row_root"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:background="?android:attr/activatedBackgroundIndicator">
+        android:background="?android:attr/activatedBackgroundIndicator"
+        android:orientation="horizontal">
 
         <View
             android:id="@+id/todo_row_tab"
             android:layout_width="10dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
         <TextView
             android:id="@+id/todo_row_tv"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="80dp"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="18sp"
-            tools:text="Treść todo - będziemy wprowadzać zadania które mają być zrobione w jak najszybszym czasie, ok" />
+            android:textSize="14sp"
+            tools:text="Treść todo - będziemy wprowadzać zadania które mają być zrobione w jak najszybszym czasie, ok"/>
 
 
     </LinearLayout>

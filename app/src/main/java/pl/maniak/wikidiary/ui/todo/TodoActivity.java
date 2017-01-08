@@ -168,8 +168,10 @@ public class TodoActivity extends BaseActivity implements TodoContract.View, Tod
                 Task editTask = new Task(editCustom.getText().toString(), new Date());
                 if (isEditOperation) {
                     editTask.setId(task.getId());
+                    presenter.onCommitEditTaskButtonClicked(editTask);
+                } else {
+                    presenter.onCommitNewTaskButtonClicked(editTask);
                 }
-                 presenter.onCommitButtonClicked(editTask);
                 dialog.dismiss();
             }
         });

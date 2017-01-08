@@ -1,5 +1,6 @@
 package pl.maniak.wikidiary.domain.todo.interactor;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
@@ -27,16 +28,40 @@ public class TodoUseCaseImpl implements TodoUseCase {
 
     @Override
     public void save(Task task) {
-        prepareWikiNote(task);
+        prepareNewTasNotekAndSave(task);
+        repository.saveTask(task);
+    }
+
+    @Override
+    public void update(Task task) {
+        String content = repository.getTaskById(task.getId()).getContent();
+        prepareEditTaskNoteAndSave(task, content);
         repository.saveTask(task);
     }
 
     @Override
     public void delete(Long id) {
+        prepareDeleteTaskNoteAndSave(getTask(id));
         repository.deleteTaskById(id);
     }
 
-    private void prepareWikiNote(Task task) {
-        useCase.save(new WikiNote(Constants.TAG_TODO, task.getContent(), task.getDate()));
+    private void prepareNewTasNotekAndSave(Task task) {
+        saveWikiNote("Nowe zadanie: **"+task.getContent()+"**", task.getDate());
+    }
+
+    private void prepareDeleteTaskNoteAndSave(Task task) {
+        saveWikiNote("Usunięto zadanie: <del>"+task.getContent()+"</del>", new Date());
+    }
+
+    private void prepareEditTaskNoteAndSave(Task task, String content) {
+        saveWikiNote("Edytowano zadanie z: **"+content+"** na **"+task.getContent()+"**", new Date());
+    }
+
+     private void prepareDoTaskNoteAndSave(Task task) {
+        saveWikiNote("Wykonano zadanie: **"+task.getContent()+"**", new Date());
+    }
+
+    private void saveWikiNote(String content, Date date) {
+        useCase.save(new WikiNote(Constants.TAG_TODO, content,date));
     }
 }

@@ -22,7 +22,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,7 +29,6 @@ import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
-import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.db.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
@@ -43,7 +41,8 @@ import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
 import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.models.WikiNote;
-import pl.maniak.wikidiary.section.todo.TodoActivity;
+import pl.maniak.wikidiary.ui.todo.TodoActivity;
+import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
 

@@ -1,19 +1,15 @@
 package pl.maniak.wikidiary;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.squareup.otto.Bus;
-import com.squareup.otto.ThreadEnforcer;
-
 
 import de.greenrobot.event.EventBus;
-import pl.maniak.wikidiary.di.AppComponent;
-import pl.maniak.wikidiary.di.AppModule;
-import pl.maniak.wikidiary.di.DaggerAppComponent;
+import pl.maniak.wikidiary.utils.di.AppComponent;
+import pl.maniak.wikidiary.utils.di.AppModule;
 import pl.maniak.wikidiary.events.CommandEvent;
+import pl.maniak.wikidiary.utils.di.DaggerAppComponent;
 
 /**
  * Created by maniak on 01.03.16.

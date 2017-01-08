@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.di;
+package pl.maniak.wikidiary.utils.di;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,12 +8,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.maniak.wikidiary.api.TodoDBHelper;
+import pl.maniak.wikidiary.api.TodoRepository;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.db.DBHelper;
 
-/**
- * Created by Maniak on 2016-02-25.
- */
 @Module
 public class AppModule {
 
@@ -37,4 +36,5 @@ public class AppModule {
     public DBHelper getDBHelper() {
         return new DBHelper(context);
     }
+
 }

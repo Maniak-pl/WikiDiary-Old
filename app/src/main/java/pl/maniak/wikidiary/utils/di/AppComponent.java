@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.di;
+package pl.maniak.wikidiary.utils.di;
 
 
 import javax.inject.Singleton;
@@ -10,9 +10,6 @@ import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
 import pl.maniak.wikidiary.fragments.SettingsFragment;
 import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 
-/**
- * Created by Maniak on 2016-02-25.
- */
 
 @Singleton
 @Component(modules = AppModule.class)

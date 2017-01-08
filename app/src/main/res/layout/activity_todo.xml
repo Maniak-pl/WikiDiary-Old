@@ -4,16 +4,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/todo_lv"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:id="@+id/todo_recycler_view" />
 
-        tools:listitem="@layout/todo_row">
-
-    </ListView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/todo_new_task_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@android:drawable/ic_input_add"
+        android:clickable="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp" />
 
 </RelativeLayout>

@@ -1,14 +1,13 @@
 package pl.maniak.wikidiary.ui;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 import pl.maniak.wikidiary.App;
-import pl.maniak.wikidiary.di.AppComponent;
+import pl.maniak.wikidiary.utils.di.AppComponent;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseContract.Router, BaseContract.View {
 

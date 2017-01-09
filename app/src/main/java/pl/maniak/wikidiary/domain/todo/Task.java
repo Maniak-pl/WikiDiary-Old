@@ -19,6 +19,8 @@ public class Task {
     protected String content;
     @DatabaseField
     protected Date date;
+    @DatabaseField
+    protected boolean done = false;
 
     public Task() {
     }

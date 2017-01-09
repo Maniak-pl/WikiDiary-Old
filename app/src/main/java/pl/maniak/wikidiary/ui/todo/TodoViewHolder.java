@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import lombok.Setter;
 import pl.maniak.wikidiary.R;
@@ -35,11 +37,16 @@ public class TodoViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.todo_row_tab)
     View tab;
 
+    @BindView(R.id.todo_row_cb)
+    CheckBox checkBox;
+
     private final Context context;
     private Task task;
 
     @Setter
     private TodoRecyclerViewAdapter.OnTodoClickedListener onClickedListener;
+    @Setter
+    private TodoRecyclerViewAdapter.OnTodoCheckListener onCheckListener;
 
     public TodoViewHolder(View view) {
         super(view);
@@ -61,12 +68,27 @@ public class TodoViewHolder extends RecyclerView.ViewHolder {
         } else {
             tab.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
         }
+
+       if(task.isDone()) {
+           tab.setVisibility(View.GONE);
+           checkBox.setVisibility(View.INVISIBLE);
+       } else {
+           tab.setVisibility(View.VISIBLE);
+           checkBox.setVisibility(View.VISIBLE);
+       }
     }
 
     @OnClick(R.id.todo_row_root)
     void onRootClicked() {
-        if (onClickedListener != null) {
+        if (onClickedListener != null && !task.isDone()) {
             onClickedListener.onTaskClicked(task);
+        }
+    }
+
+    @OnCheckedChanged(R.id.todo_row_cb)
+    void onRootChecked() {
+        if(onCheckListener != null) {
+            onCheckListener.onTaskChecked(task);
         }
     }
 

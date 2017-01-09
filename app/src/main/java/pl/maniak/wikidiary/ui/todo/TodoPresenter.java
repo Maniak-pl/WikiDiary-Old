@@ -63,6 +63,12 @@ public class TodoPresenter implements TodoContract.Presenter {
     }
 
     @Override
+    public void onDoneChecked(Task task) {
+        useCase.done(task);
+        updateTasks();
+    }
+
+    @Override
     public void onEditTaskOptionClicked() {
         if(view != null) {
             view.showEditTaskEditor(useCase.getTask(currentTaskId));

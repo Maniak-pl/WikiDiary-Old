@@ -68,6 +68,7 @@ public class TodoActivity extends BaseActivity implements TodoContract.View, Tod
 
     private void initRecycler() {
         adapter.setOnClickListener(todoData -> presenter.onTaskClicked(todoData));
+        adapter.setOnCheckListener(todoData -> presenter.onDoneChecked(todoData));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }

@@ -22,6 +22,7 @@ public interface TodoContract {
         void onPauseCalled();
         void onNewTaskButtonClicked();
         void onTaskClicked(Task task);
+        void onDoneChecked(Task task);
         void onEditTaskOptionClicked();
         void onDeleteTaskOptionClicked();
         void onCommitNewTaskButtonClicked(Task task);

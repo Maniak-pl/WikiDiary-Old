@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:tint="@color/black"
         android:src="@android:drawable/ic_input_add"
         android:clickable="true"
         android:layout_marginEnd="16dp"

@@ -52,6 +52,8 @@ public class TodoModule {
     RecyclerView.LayoutManager provideLayoutManager() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         return layoutManager;
     }
 

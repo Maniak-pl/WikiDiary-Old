@@ -45,6 +45,13 @@ public class TodoUseCaseImpl implements TodoUseCase {
         repository.deleteTaskById(id);
     }
 
+    @Override
+    public void done(Task task) {
+        prepareDoneTaskNoteAndSave(task);
+        task.setDone(true);
+        repository.saveTask(task);
+    }
+
     private void prepareNewTasNotekAndSave(Task task) {
         saveWikiNote("Nowe zadanie: **"+task.getContent()+"**", task.getDate());
     }
@@ -57,9 +64,11 @@ public class TodoUseCaseImpl implements TodoUseCase {
         saveWikiNote("Edytowano zadanie z: **"+content+"** na **"+task.getContent()+"**", new Date());
     }
 
-     private void prepareDoTaskNoteAndSave(Task task) {
+     private void prepareDoneTaskNoteAndSave(Task task) {
         saveWikiNote("Wykonano zadanie: **"+task.getContent()+"**", new Date());
     }
+
+
 
     private void saveWikiNote(String content, Date date) {
         useCase.save(new WikiNote(Constants.TAG_TODO, content,date));

@@ -10,4 +10,5 @@ public interface TodoUseCase {
     void save(Task task);
     void update(Task task);
     void delete(Long id);
+    void done(Task task);
 }

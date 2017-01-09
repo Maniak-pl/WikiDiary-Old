@@ -19,6 +19,8 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<TodoViewHolder
 
     @Setter
     private OnTodoClickedListener onClickListener;
+    @Setter
+    private OnTodoCheckListener onCheckListener;
 
     @Override
     public TodoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,6 +29,7 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<TodoViewHolder
 
         TodoViewHolder viewHolder = new TodoViewHolder(view);
         viewHolder.setOnClickedListener(onClickListener);
+        viewHolder.setOnCheckListener(onCheckListener);
         return viewHolder;
     }
 
@@ -50,6 +53,10 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<TodoViewHolder
 
     public interface OnTodoClickedListener {
         void onTaskClicked(Task task);
+    }
+
+    public interface OnTodoCheckListener {
+        void onTaskChecked(Task task);
     }
 
 

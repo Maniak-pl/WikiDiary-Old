@@ -52,11 +52,11 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<TodoViewHolder
     }
 
     public interface OnTodoClickedListener {
-        void onTaskClicked(Task task);
+        void onTaskClicked(long taskId);
     }
 
     public interface OnTodoCheckListener {
-        void onTaskChecked(Task task);
+        void onTaskChecked(long taskId);
     }
 
 

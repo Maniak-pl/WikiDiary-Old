@@ -21,11 +21,11 @@ public interface TodoContract {
         void onResumed();
         void onPauseCalled();
         void onNewTaskButtonClicked();
-        void onTaskClicked(Task task);
-        void onDoneChecked(Task task);
+        void onTaskClicked(long taksId);
+        void onDoneChecked(long taskId);
         void onEditTaskOptionClicked();
         void onDeleteTaskOptionClicked();
-        void onCommitNewTaskButtonClicked(Task task);
-        void onCommitEditTaskButtonClicked(Task task);
+        void onCommitNewTaskButtonClicked(String content);
+        void onCommitEditTaskButtonClicked(String content);
     }
 }

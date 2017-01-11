@@ -1,5 +1,7 @@
 package pl.maniak.wikidiary.ui.todo;
 
+import java.util.Date;
+
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCase;
 import pl.maniak.wikidiary.domain.todo.Task;
@@ -55,16 +57,16 @@ public class TodoPresenter implements TodoContract.Presenter {
     }
 
     @Override
-    public void onTaskClicked(Task task) {
+    public void onTaskClicked(long taskId) {
         if(view != null) {
-            currentTaskId = task.getId();
+            currentTaskId = taskId;
             view.showOptionsDialog();
         }
     }
 
     @Override
-    public void onDoneChecked(Task task) {
-        useCase.done(task);
+    public void onDoneChecked(long taskId) {
+        useCase.done(useCase.getTask(taskId));
         updateTasks();
     }
 
@@ -82,15 +84,22 @@ public class TodoPresenter implements TodoContract.Presenter {
     }
 
     @Override
-    public void onCommitNewTaskButtonClicked(Task task) {
-        useCase.save(task);
+    public void onCommitNewTaskButtonClicked(String content) {
+        useCase.save(new Task(content, getCurrentDate()));
         updateTasks();
     }
 
     @Override
-    public void onCommitEditTaskButtonClicked(Task task) {
-        useCase.update(task);
+    public void onCommitEditTaskButtonClicked(String content) {
+        updateTaskAndSaveInRepository(content);
         updateTasks();
+    }
+
+    private void updateTaskAndSaveInRepository(String content) {
+        Task currentTask = useCase.getTask(currentTaskId);
+        currentTask.setContent(content);
+        currentTask.setDate(getCurrentDate());
+        useCase.update(currentTask);
     }
 
     @Override
@@ -111,5 +120,9 @@ public class TodoPresenter implements TodoContract.Presenter {
     @Override
     public void detachView() {
         view = null;
+    }
+
+    private Date getCurrentDate() {
+        return new Date();
     }
 }

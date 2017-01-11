@@ -81,14 +81,14 @@ public class TodoViewHolder extends RecyclerView.ViewHolder {
     @OnClick(R.id.todo_row_root)
     void onRootClicked() {
         if (onClickedListener != null && !task.isDone()) {
-            onClickedListener.onTaskClicked(task);
+            onClickedListener.onTaskClicked(task.getId());
         }
     }
 
     @OnCheckedChanged(R.id.todo_row_cb)
     void onRootChecked() {
         if(onCheckListener != null) {
-            onCheckListener.onTaskChecked(task);
+            onCheckListener.onTaskChecked(task.getId());
         }
     }
 

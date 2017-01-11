@@ -67,8 +67,8 @@ public class TodoActivity extends BaseActivity implements TodoContract.View, Tod
     }
 
     private void initRecycler() {
-        adapter.setOnClickListener(todoData -> presenter.onTaskClicked(todoData));
-        adapter.setOnCheckListener(todoData -> presenter.onDoneChecked(todoData));
+        adapter.setOnClickListener(taksId -> presenter.onTaskClicked(taksId));
+        adapter.setOnCheckListener(taksId -> presenter.onDoneChecked(taksId));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
@@ -166,12 +166,10 @@ public class TodoActivity extends BaseActivity implements TodoContract.View, Tod
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Task editTask = new Task(editCustom.getText().toString(), new Date());
                 if (isEditOperation) {
-                    editTask.setId(task.getId());
-                    presenter.onCommitEditTaskButtonClicked(editTask);
+                    presenter.onCommitEditTaskButtonClicked(editCustom.getText().toString());
                 } else {
-                    presenter.onCommitNewTaskButtonClicked(editTask);
+                    presenter.onCommitNewTaskButtonClicked(editCustom.getText().toString());
                 }
                 dialog.dismiss();
             }

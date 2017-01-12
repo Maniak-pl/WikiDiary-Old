@@ -5,7 +5,7 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.todo.Task;
-import pl.maniak.wikidiary.domain.todo.repository.TodoRepository;
+import pl.maniak.wikidiary.repository.todo.TodoRepository;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUseCase;
 import pl.maniak.wikidiary.utils.Constants;

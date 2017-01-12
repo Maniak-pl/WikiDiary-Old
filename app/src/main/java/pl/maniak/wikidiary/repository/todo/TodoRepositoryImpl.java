@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.repository;
+package pl.maniak.wikidiary.repository.todo;
 
 import com.j256.ormlite.dao.Dao;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.todo.Task;
-import pl.maniak.wikidiary.domain.todo.repository.TodoRepository;
+import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.utils.L;
 
 @RequiredArgsConstructor

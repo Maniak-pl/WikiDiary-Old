@@ -1,7 +1,5 @@
 package pl.maniak.wikidiary.repository.tag;
 
-import android.util.Log;
-
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 
@@ -11,7 +9,6 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.tag.Tag;
-import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.utils.L;
 
@@ -65,7 +62,4 @@ public class TagRepositoryImpl implements TagRepository {
             L.e("TagRepositoryImpl.deleteTag()", e);
         }
     }
-
-
-
 }

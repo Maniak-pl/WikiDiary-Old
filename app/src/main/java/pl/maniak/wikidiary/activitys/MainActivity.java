@@ -41,6 +41,7 @@ import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
 import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
+import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     @Inject
-    public DBHelper dbHelper;
+    public WikiNoteRepository repository;
 
 
     @Override
@@ -191,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    sendEmail(WikiHelper.preparingEntryOnWiki(dbHelper.getWikiNotes()));
+                    sendEmail(WikiHelper.preparingEntryOnWiki(repository.getNotes()));
                 }
             }).start();
         } else {
@@ -258,14 +259,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case CommandEvent.CLEAR:
                 stopProgress();
-                dbHelper.deleteAllWikiNote();
+                repository.deleteAllNotes();
                 break;
             case CommandEvent.SHOW_ERROR:
                 showError(event.getMessage());
                 break;
             case CommandEvent.SHOW_HEALTH_RESULT:
                 int steps = Integer.parseInt(event.getMessage());
-                dbHelper.addWikiNote(new WikiNote(Constants.TAG_S_HEALTH, WikiParser.putHealth(steps), new Date()));
+                repository.saveNote(new WikiNote(Constants.TAG_S_HEALTH, WikiParser.putHealth(steps), new Date()));
                 break;
             case CommandEvent.SHOW_VOICE:
                 startVoiceRecognitionDialog();

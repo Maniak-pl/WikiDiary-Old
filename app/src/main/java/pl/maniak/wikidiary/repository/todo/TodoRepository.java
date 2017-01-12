@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.domain.todo.repository;
+package pl.maniak.wikidiary.repository.todo;
 
 import java.util.List;
 

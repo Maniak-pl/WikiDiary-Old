@@ -33,6 +33,7 @@ import pl.maniak.wikidiary.modals.CommandDialogFragment;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.tag.TagRepository;
+import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.views.FlowLayout;
@@ -52,6 +53,9 @@ public class MainFragment extends Fragment {
 
     @Inject
     public TagRepository tagRepository;
+
+    @Inject
+    public WikiNoteRepository wikiNoteRepository;
 
 
     private List<Tag> tag = new ArrayList();
@@ -142,7 +146,7 @@ public class MainFragment extends Fragment {
 
     private void addWikiNote(String tag) {
         if (!mEditText.getText().toString().equals("")) {
-            App.getAppComponent().getDBHelper().addWikiNote(new WikiNote(tag, mEditText.getText().toString(), dateWikiNote));
+            wikiNoteRepository.saveNote(new WikiNote(tag, mEditText.getText().toString(), dateWikiNote));
             mEditText.setText("");
         }
     }

@@ -3,14 +3,11 @@ package pl.maniak.wikidiary.ui.todo;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.Date;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,9 +16,6 @@ import butterknife.OnClick;
 import lombok.Setter;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.todo.Task;
-import pl.maniak.wikidiary.domain.todo.repository.TodoRepository;
-import pl.maniak.wikidiary.utils.L;
-import pl.maniak.wikidiary.utils.config.ResourceProvider;
 
 public class TodoViewHolder extends RecyclerView.ViewHolder {
 

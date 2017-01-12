@@ -10,6 +10,7 @@ import dagger.Module;
 import dagger.Provides;
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.App;
+import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.repository.todo.TodoRepositoryImpl;
 import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCase;
 import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCaseImpl;
@@ -77,8 +78,8 @@ public class TodoModule {
     }
 
     @Provides
-    WikiNoteRepository provideWikiNoteRepository() {
-        return new WikiNoteRepositoryImpl(App.getAppComponent().getDBHelper());
+    WikiNoteRepository provideWikiNoteRepository(DBHelper helper) {
+        return new WikiNoteRepositoryImpl(helper);
     }
 
 }

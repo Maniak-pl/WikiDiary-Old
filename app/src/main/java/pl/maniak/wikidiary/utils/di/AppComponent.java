@@ -10,6 +10,7 @@ import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
 import pl.maniak.wikidiary.fragments.SettingsFragment;
 import pl.maniak.wikidiary.modals.AddTagDialogFragment;
+import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.utils.config.ResourceProvider;
 
 
@@ -30,4 +31,6 @@ public interface AppComponent {
     void inject(AddTagDialogFragment addTagDialogFragment);
 
     DBHelper getDBHelper();
+
+    WikiNoteRepository getWikiNoteRepository();
 }

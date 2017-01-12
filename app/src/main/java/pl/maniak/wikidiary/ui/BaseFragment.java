@@ -27,7 +27,7 @@ public abstract class BaseFragment extends Fragment {
         initDaggerComponent();
     }
 
-    private void initDaggerComponent() {
+    protected void initDaggerComponent() {
 
     }
 

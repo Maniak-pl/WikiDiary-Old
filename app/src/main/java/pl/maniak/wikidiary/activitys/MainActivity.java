@@ -43,9 +43,14 @@ import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
+import pl.maniak.wikidiary.ui.wikinote.EditNoteFragmentImpl;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
+import pl.maniak.wikidiary.utils.di.wikinote.DaggerEditNoteFragmentComponent;
+import pl.maniak.wikidiary.utils.di.wikinote.EditNoteFragmentModule;
+
+import static pl.maniak.wikidiary.App.getAppComponent;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -87,9 +92,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        App.getAppComponent().inject(this);
+        getAppComponent().inject(this);
 
     }
+
 
     @Override
     protected void onStart() {
@@ -221,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case 1:
                     return PreparingNoteFragment.newInstance();
                 default:
-                    return SettingsFragment.newInstance();
+                    return EditNoteFragmentImpl.newInstance();
             }
 
         }

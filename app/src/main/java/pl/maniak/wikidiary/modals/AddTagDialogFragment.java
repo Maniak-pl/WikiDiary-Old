@@ -27,9 +27,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.domain.DBHelper;
+import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.domain.tag.Tag;
+import pl.maniak.wikidiary.repository.tag.TagRepository;
 import pl.maniak.wikidiary.views.FlowLayout;
 
 
@@ -43,17 +44,14 @@ public class AddTagDialogFragment extends DialogFragment {
     private Set<Tag> setTag = new TreeSet<Tag>();
 
     @Inject
-    public DBHelper dbHelper;
+    public TagRepository repository;
 
     @Inject
     SharedPreferences preferences;
 
 
-
     public static AddTagDialogFragment newInstance() {
-
         Bundle args = new Bundle();
-
         AddTagDialogFragment fragment = new AddTagDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -83,9 +81,6 @@ public class AddTagDialogFragment extends DialogFragment {
         return alertDialog;
     }
 
-
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -97,11 +92,10 @@ public class AddTagDialogFragment extends DialogFragment {
         super.onDestroyView();
     }
 
-
     @OnClick(R.id.addTagBtn)
     public void onClick() {
         if (!addTagEt.getText().toString().equals("")) {
-            addTag(addTagEt.getText().toString());
+            repository.addTag(addTagEt.getText().toString());
             addTagEt.setText("");
             reload();
         }
@@ -112,9 +106,6 @@ public class AddTagDialogFragment extends DialogFragment {
         dismiss();
 
     }
-
-
-
 
     private void initTagContener() {
         mFlowLayout.removeAllViews();
@@ -131,11 +122,7 @@ public class AddTagDialogFragment extends DialogFragment {
                 public boolean onLongClick(View v) {
                     String tag = ((TextView) v).getText().toString();
                     setTag.remove(new Tag(tag));
-                    try {
-                        dbHelper.deleteTag(tag);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    repository.deleteTag(tag);
                     reload();
                     return false;
                 }
@@ -145,20 +132,7 @@ public class AddTagDialogFragment extends DialogFragment {
         mFlowLayout.invalidate();
     }
 
-    public void addTag(String tag) {
-
-        try {
-            dbHelper.addTag(new Tag(tag));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public List<Tag> loadTag() {
-        try {
-            return dbHelper.getAllTags();
-        } catch (SQLException e) {
-            return new ArrayList<>();
-        }
+        return repository.getAllTags();
     }
 }

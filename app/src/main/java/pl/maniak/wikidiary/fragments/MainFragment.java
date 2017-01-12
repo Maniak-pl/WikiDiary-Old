@@ -26,12 +26,13 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.domain.DBHelper;
+import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.helpers.DateHelper;
 import pl.maniak.wikidiary.modals.CommandDialogFragment;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
+import pl.maniak.wikidiary.repository.tag.TagRepository;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.views.FlowLayout;
@@ -50,7 +51,8 @@ public class MainFragment extends Fragment {
     FlowLayout mFlowLayout;
 
     @Inject
-    public DBHelper dbHelper;
+    public TagRepository tagRepository;
+
 
     private List<Tag> tag = new ArrayList();
     private Date dateWikiNote = new Date();
@@ -97,11 +99,7 @@ public class MainFragment extends Fragment {
 
     private void initTagContener() {
         mFlowLayout.removeAllViews();
-        try {
-            tag = dbHelper.getAllTags();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        tag = tagRepository.getAllTags();
 
         for (int i = 0; i < tag.size(); i++) {
             TextView tv = (TextView) getActivity().getLayoutInflater().inflate(R.layout.tag_item, null);
@@ -144,11 +142,10 @@ public class MainFragment extends Fragment {
 
     private void addWikiNote(String tag) {
         if (!mEditText.getText().toString().equals("")) {
-            dbHelper.addWikiNote(new WikiNote(tag, mEditText.getText().toString(), dateWikiNote));
+            App.getAppComponent().getDBHelper().addWikiNote(new WikiNote(tag, mEditText.getText().toString(), dateWikiNote));
             mEditText.setText("");
         }
     }
-
 
 
     private void showDatePicker() {
@@ -204,7 +201,7 @@ public class MainFragment extends Fragment {
     };
 
     public void setEditText(String note) {
-        if(mEditText!=null) {
+        if (mEditText != null) {
             mEditText.setText(note);
         }
     }
@@ -236,7 +233,7 @@ public class MainFragment extends Fragment {
 
     }
 
-    private void startQuickCommands(){
+    private void startQuickCommands() {
         CommandDialogFragment fragment = CommandDialogFragment.newInstance();
         fragment.show(getFragmentManager(), "QuickCommands");
     }

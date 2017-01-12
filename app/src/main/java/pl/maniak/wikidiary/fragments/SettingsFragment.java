@@ -24,8 +24,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.domain.DBHelper;
+import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.domain.tag.Tag;
+import pl.maniak.wikidiary.repository.tag.TagRepository;
 import pl.maniak.wikidiary.views.FlowLayout;
 
 /**
@@ -41,7 +42,7 @@ public class SettingsFragment extends Fragment {
     private Set<Tag> setTag = new TreeSet<Tag>();
 
     @Inject
-    public DBHelper dbHelper;
+    public TagRepository repository;
 
     @Inject
     SharedPreferences preferences;
@@ -81,7 +82,7 @@ public class SettingsFragment extends Fragment {
     @OnClick(R.id.addTagBtn)
     public void onClick() {
         if (!addTagEt.getText().toString().equals("")) {
-            addTag(addTagEt.getText().toString());
+            repository.addTag(addTagEt.getText().toString());
             addTagEt.setText("");
             reload();
         }
@@ -108,11 +109,7 @@ public class SettingsFragment extends Fragment {
                 public boolean onLongClick(View v) {
                     String tag = ((TextView) v).getText().toString();
                     setTag.remove(new Tag(tag));
-                    try {
-                        dbHelper.deleteTag(tag);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    repository.deleteTag(tag);
                     reload();
                     return false;
                 }
@@ -122,20 +119,9 @@ public class SettingsFragment extends Fragment {
         mFlowLayout.invalidate();
     }
 
-    public void addTag(String tag) {
-
-        try {
-            dbHelper.addTag(new Tag(tag));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public List<Tag> loadTag() {
-        try {
-            return dbHelper.getAllTags();
-        } catch (SQLException e) {
-            return new ArrayList<>();
-        }
+
+            return repository.getAllTags();
+
     }
 }

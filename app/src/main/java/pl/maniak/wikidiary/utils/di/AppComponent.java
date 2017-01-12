@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import pl.maniak.wikidiary.activitys.MainActivity;
-import pl.maniak.wikidiary.domain.DBHelper;
+import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
 import pl.maniak.wikidiary.fragments.SettingsFragment;

@@ -10,8 +10,7 @@ import dagger.Module;
 import dagger.Provides;
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.App;
-import pl.maniak.wikidiary.data.TodoRepositoryImpl;
-import pl.maniak.wikidiary.domain.DBHelper;
+import pl.maniak.wikidiary.repository.TodoRepositoryImpl;
 import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCase;
 import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCaseImpl;
 import pl.maniak.wikidiary.domain.todo.repository.TodoRepository;
@@ -64,7 +63,7 @@ public class TodoModule {
 
     @Provides
     TodoRepository provideTodoRepository(){
-        return new TodoRepositoryImpl(activity);
+        return new TodoRepositoryImpl(App.getAppComponent().getDBHelper());
     }
 
     @Provides

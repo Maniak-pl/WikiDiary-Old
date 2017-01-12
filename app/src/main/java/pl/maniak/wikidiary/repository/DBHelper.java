@@ -1,8 +1,7 @@
-package pl.maniak.wikidiary.domain;
+package pl.maniak.wikidiary.repository;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -14,10 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import pl.maniak.wikidiary.domain.tag.Tag;
+import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.utils.L;
 
@@ -30,6 +27,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<WikiNote, Long> wikiNoteDao = null;
     private Dao<Tag, Long> tagDao = null;
+    private Dao<Task, Long> taskDao = null;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,6 +40,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             L.e("DBHelper.onCreate()");
             TableUtils.createTable(connectionSource, WikiNote.class);
             TableUtils.createTable(connectionSource, Tag.class);
+            TableUtils.createTable(connectionSource, Task.class);
 
         } catch (SQLException e) {
             L.e("DBHelper.onCreate()", e);
@@ -54,10 +53,18 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             L.e("DBHelper.onUpgrade()");
             TableUtils.dropTable(connectionSource, WikiNote.class, true);
             TableUtils.dropTable(connectionSource, Tag.class, true);
+            TableUtils.dropTable(connectionSource, Task.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             L.e("DBHelper.onUpgrade()", e);
         }
+    }
+
+    public Dao<Task, Long> getTaskDao() throws SQLException {
+        if (taskDao == null) {
+            taskDao = getDao(Task.class);
+        }
+        return taskDao;
     }
 
     public Dao<WikiNote, Long> getWikiNoteDao() throws SQLException {
@@ -74,29 +81,15 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         return tagDao;
     }
 
-    public List<Tag> getAllTags(List<String> tagsNames) throws SQLException {
-        List<Tag> tagsResult;
 
-        tagsResult = getTagDao().queryBuilder().where().in("tag", tagsNames).query();
 
-        return tagsResult;
-    }
 
-    public void addTag(Tag tag) throws SQLException{
-        getTagDao().createOrUpdate(tag);
-    }
 
-    public void deleteTag(String tag) throws SQLException{
-        DeleteBuilder<Tag,Long> delete = getTagDao().deleteBuilder();
-        delete.where().eq("tag", tag);
-        delete.delete();
-    }
 
-    public List<Tag> getAllTags() throws SQLException{
-        List<Tag> tags = new ArrayList<>(getTagDao().queryForAll());
 
-        return tags;
-    }
+
+
+
 
 
     public void addWikiNote(WikiNote wikiNote) {

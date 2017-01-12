@@ -3,10 +3,8 @@ package pl.maniak.wikidiary.domain.wikinote.repository.datasource;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import lombok.RequiredArgsConstructor;
-import pl.maniak.wikidiary.domain.DBHelper;
+import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.domain.wikinote.repository.WikiNoteRepository;
 import pl.maniak.wikidiary.utils.L;

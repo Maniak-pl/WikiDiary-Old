@@ -18,8 +18,8 @@ import pl.maniak.wikidiary.repository.todo.TodoRepository;
 import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUseCase;
 import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUserCaseImpl;
-import pl.maniak.wikidiary.domain.wikinote.repository.WikiNoteRepository;
-import pl.maniak.wikidiary.domain.wikinote.repository.datasource.WikiNoteRepositoryImpl;
+import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
+import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepositoryImpl;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
 import pl.maniak.wikidiary.ui.todo.TodoContract;
 import pl.maniak.wikidiary.ui.todo.TodoPresenter;
@@ -75,11 +75,6 @@ public class TodoModule {
     @Provides
     WikiNoteUseCase provideWikiNoteUseCase(WikiNoteRepository repository) {
         return new WikiNoteUserCaseImpl(repository);
-    }
-
-    @Provides
-    WikiNoteRepository provideWikiNoteRepository(DBHelper helper) {
-        return new WikiNoteRepositoryImpl(helper);
     }
 
 }

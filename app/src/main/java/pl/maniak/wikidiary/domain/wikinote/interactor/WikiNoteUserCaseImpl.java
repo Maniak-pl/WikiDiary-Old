@@ -4,7 +4,8 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
-import pl.maniak.wikidiary.domain.wikinote.repository.WikiNoteRepository;
+import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
+
 
 @RequiredArgsConstructor
 public class WikiNoteUserCaseImpl implements WikiNoteUseCase {
@@ -23,7 +24,7 @@ public class WikiNoteUserCaseImpl implements WikiNoteUseCase {
 
     @Override
     public void save(WikiNote wikiNote) {
-        repository.saveWikiNote(wikiNote);
+        repository.saveNote(wikiNote);
     }
 
     @Override

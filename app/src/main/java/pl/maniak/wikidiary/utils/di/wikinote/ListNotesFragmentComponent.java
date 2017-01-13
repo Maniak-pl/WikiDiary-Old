@@ -5,7 +5,7 @@ import dagger.Component;
 import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragmentImpl;
 import pl.maniak.wikidiary.utils.di.AppComponent;
 
-@WikiNoteScope
+@ListNotesFragmentScope
 @Component(
         dependencies = AppComponent.class,
         modules = ListNotesFragmentModule.class

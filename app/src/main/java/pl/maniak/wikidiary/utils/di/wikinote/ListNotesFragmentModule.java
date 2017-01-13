@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import dagger.Module;
 import dagger.Provides;
 import lombok.RequiredArgsConstructor;
-import pl.maniak.wikidiary.ui.wikinote.ListNotesFragmentImpl;
-import pl.maniak.wikidiary.ui.wikinote.ListNotesRecyclerViewAdapter;
+import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragmentImpl;
+import pl.maniak.wikidiary.ui.wikinote.list.ListNotesRecyclerViewAdapter;
 
 @Module
 @RequiredArgsConstructor

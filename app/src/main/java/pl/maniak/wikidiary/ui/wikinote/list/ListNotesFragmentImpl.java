@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.ui.wikinote;
+package pl.maniak.wikidiary.ui.wikinote.list;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;

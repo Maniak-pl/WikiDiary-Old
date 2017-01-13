@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.ui.wikinote;
+package pl.maniak.wikidiary.ui.wikinote.list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +13,6 @@ import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.utils.helpers.DateHelper;
 
-/**
- * Created by mac on 12.01.2017.
- */
 public class ListNotesViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.list_notes_content)

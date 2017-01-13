@@ -2,7 +2,7 @@ package pl.maniak.wikidiary.utils.di.wikinote;
 
 
 import dagger.Component;
-import pl.maniak.wikidiary.ui.wikinote.ListNotesFragmentImpl;
+import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragmentImpl;
 import pl.maniak.wikidiary.utils.di.AppComponent;
 
 @WikiNoteScope

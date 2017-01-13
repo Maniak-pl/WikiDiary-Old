@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.ui.wikinote;
+package pl.maniak.wikidiary.ui.wikinote.list;
 
 import java.util.List;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;

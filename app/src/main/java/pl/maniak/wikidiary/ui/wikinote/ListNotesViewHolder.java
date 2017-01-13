@@ -11,7 +11,7 @@ import butterknife.OnClick;
 import lombok.Setter;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
-import pl.maniak.wikidiary.helpers.DateHelper;
+import pl.maniak.wikidiary.utils.helpers.DateHelper;
 
 /**
  * Created by mac on 12.01.2017.

@@ -33,15 +33,16 @@ import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
-import pl.maniak.wikidiary.helpers.WikiHelper;
-import pl.maniak.wikidiary.helpers.WikiParser;
+import pl.maniak.wikidiary.ui.wikinote.ListNotesFragment;
+import pl.maniak.wikidiary.ui.wikinote.ListNotesFragmentImpl;
+import pl.maniak.wikidiary.utils.helpers.WikiHelper;
+import pl.maniak.wikidiary.utils.helpers.WikiParser;
 import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
 import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
-import pl.maniak.wikidiary.ui.wikinote.ListNotesFragmentImpl;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
@@ -55,7 +56,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     @Inject
-    public WikiNoteRepository repository;
+    WikiNoteRepository repository;
+
+    @Inject
+    ListNotesFragment listNotesFragment;
 
 
     @Override
@@ -223,14 +227,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case 1:
                     return PreparingNoteFragment.newInstance();
                 default:
-                    return ListNotesFragmentImpl.newInstance();
+                    return (ListNotesFragmentImpl)listNotesFragment;
             }
 
         }
 
         @Override
-        public int getCount() {
-            // Show 3 total pages.
+        public int getCount() {            // Show 3 total pages.
             return 3;
         }
 

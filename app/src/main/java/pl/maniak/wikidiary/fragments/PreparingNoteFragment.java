@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.helpers.WikiHelper;
+import pl.maniak.wikidiary.utils.helpers.WikiHelper;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 
 

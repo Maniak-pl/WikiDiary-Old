@@ -40,7 +40,7 @@
 
 
 
-    <pl.maniak.wikidiary.views.FlowLayout
+    <pl.maniak.wikidiary.ui.views.FlowLayout
         android:id="@+id/containerTags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

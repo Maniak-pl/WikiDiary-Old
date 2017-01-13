@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
  />
 
-        <pl.maniak.wikidiary.views.NumberKeyboardView
+        <pl.maniak.wikidiary.ui.views.NumberKeyboardView
             android:id="@+id/numberKeyboardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -12,7 +12,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,9 +25,8 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
-import pl.maniak.wikidiary.helpers.DateHelper;
+import pl.maniak.wikidiary.utils.helpers.DateHelper;
 import pl.maniak.wikidiary.modals.CommandDialogFragment;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
@@ -36,7 +34,7 @@ import pl.maniak.wikidiary.repository.tag.TagRepository;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
-import pl.maniak.wikidiary.views.FlowLayout;
+import pl.maniak.wikidiary.ui.views.FlowLayout;
 
 /**
  * Created by pliszka on 01.03.16.

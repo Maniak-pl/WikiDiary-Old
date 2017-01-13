@@ -52,7 +52,7 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroyView();
     }
 
-    private void clear() {
+    protected void clear() {
 
     }
 

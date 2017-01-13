@@ -14,7 +14,7 @@ import android.widget.TextView;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.events.CommandEvent;
-import pl.maniak.wikidiary.views.NumberKeyboardView;
+import pl.maniak.wikidiary.ui.views.NumberKeyboardView;
 
 /**
  * Created by Sony on 2016-01-17.

@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.helpers;
+package pl.maniak.wikidiary.utils.helpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;

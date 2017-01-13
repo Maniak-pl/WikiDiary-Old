@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.views;
+package pl.maniak.wikidiary.ui.views;
 
 
 import android.content.Context;

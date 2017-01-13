@@ -13,6 +13,7 @@ import butterknife.BindView;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
+import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.ui.BaseFragment;
 import pl.maniak.wikidiary.utils.di.wikinote.DaggerListNotesFragmentComponent;
 import pl.maniak.wikidiary.utils.di.wikinote.ListNotesFragmentModule;
@@ -33,6 +34,10 @@ public class ListNotesFragmentImpl extends BaseFragment implements ListNotesFrag
 
     @Inject
     ListNotesRecyclerViewAdapter adapter;
+
+    @Inject
+    WikiNoteRepository repository;
+
 
     public static ListNotesFragmentImpl newInstance() {
 
@@ -72,12 +77,19 @@ public class ListNotesFragmentImpl extends BaseFragment implements ListNotesFrag
     @Override
     public void onResume() {
         super.onResume();
-        showNotes(App.getAppComponent().getWikiNoteRepository().getNotes());
+        showNotes(repository.getNotes());
+    }
+
+    @Override
+    protected void clear() {
+        if (recyclerView != null) {
+            recyclerView.setLayoutManager(null);
+        }
     }
 
     @Override
     protected int getContentViewId() {
-        return R.layout.fragment_edit_note;
+        return R.layout.fragment_list_notes;
     }
 
     @Override

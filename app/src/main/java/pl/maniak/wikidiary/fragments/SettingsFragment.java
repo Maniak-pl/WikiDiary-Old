@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,10 +23,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.repository.tag.TagRepository;
-import pl.maniak.wikidiary.views.FlowLayout;
+import pl.maniak.wikidiary.ui.views.FlowLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +35,7 @@ public class SettingsFragment extends Fragment {
     @BindView(R.id.addTagEt)
     EditText addTagEt;
     @BindView(R.id.settingsContainerTags)
-    pl.maniak.wikidiary.views.FlowLayout mFlowLayout;
+    pl.maniak.wikidiary.ui.views.FlowLayout mFlowLayout;
 
     private Set<Tag> setTag = new TreeSet<Tag>();
 

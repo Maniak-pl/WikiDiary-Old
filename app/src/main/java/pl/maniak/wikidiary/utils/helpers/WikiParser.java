@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.helpers;
+package pl.maniak.wikidiary.utils.helpers;
 
 /**
  * Created by maniak on 02.03.16.

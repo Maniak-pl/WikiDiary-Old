@@ -13,7 +13,6 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -27,11 +26,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.repository.tag.TagRepository;
-import pl.maniak.wikidiary.views.FlowLayout;
+import pl.maniak.wikidiary.ui.views.FlowLayout;
 
 
 public class AddTagDialogFragment extends DialogFragment {

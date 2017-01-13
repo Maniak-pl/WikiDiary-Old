@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.helpers.DateHelper;
+import pl.maniak.wikidiary.utils.helpers.DateHelper;
 import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.ui.BaseActivity;
 import pl.maniak.wikidiary.utils.di.todo.DaggerTodoComponent;

@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.helpers;
+package pl.maniak.wikidiary.utils.helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

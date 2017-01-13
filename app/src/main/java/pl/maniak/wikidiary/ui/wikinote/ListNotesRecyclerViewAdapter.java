@@ -13,7 +13,7 @@ import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 
 @RequiredArgsConstructor
-public class EditNoteRecyclerViewAdapter extends RecyclerView.Adapter<EditNoteViewHolder> {
+public class ListNotesRecyclerViewAdapter extends RecyclerView.Adapter<ListNotesViewHolder> {
 
     private final List<WikiNote> dataSet;
 
@@ -22,16 +22,16 @@ public class EditNoteRecyclerViewAdapter extends RecyclerView.Adapter<EditNoteVi
 
 
     @Override
-    public EditNoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListNotesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_edit_note, parent, false);
-        EditNoteViewHolder viewHolder = new EditNoteViewHolder(view);
+                .inflate(R.layout.item_wiki_note, parent, false);
+        ListNotesViewHolder viewHolder = new ListNotesViewHolder(view);
         viewHolder.setOnClickListener(onClickListener);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(EditNoteViewHolder holder, int position) {
+    public void onBindViewHolder(ListNotesViewHolder holder, int position) {
         WikiNote note = dataSet.get(position);
         holder.setItem(note);
     }

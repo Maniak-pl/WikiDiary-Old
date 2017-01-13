@@ -14,7 +14,6 @@ import pl.maniak.wikidiary.repository.tag.TagRepository;
 import pl.maniak.wikidiary.repository.tag.TagRepositoryImpl;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepositoryImpl;
-import pl.maniak.wikidiary.ui.wikinote.EditNoteFragment;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.utils.config.ResourceProvider;

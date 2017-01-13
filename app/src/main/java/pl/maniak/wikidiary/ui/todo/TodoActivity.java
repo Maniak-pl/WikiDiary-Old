@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -157,7 +156,7 @@ public class TodoActivity extends BaseActivity implements TodoContract.View, Tod
         // dotyczy edycji
         if (isEditOperation) {
             titleView.setText("Edycja zadania");
-            dateTv.setText(DateHelper.parseDateToString(task.getDate()));
+            dateTv.setText(DateHelper.parseDateToStringWithDayName(task.getDate()));
             editCustom.setText(task.getContent());
         } else {
             dateTv.setVisibility(View.GONE);

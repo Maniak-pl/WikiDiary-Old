@@ -11,22 +11,29 @@ import butterknife.OnClick;
 import lombok.Setter;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
+import pl.maniak.wikidiary.helpers.DateHelper;
 
 /**
  * Created by mac on 12.01.2017.
  */
-public class EditNoteViewHolder extends RecyclerView.ViewHolder {
+public class ListNotesViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.edit_note_content)
+    @BindView(R.id.list_notes_content)
     TextView content;
+
+    @BindView(R.id.list_notes_date)
+    TextView date;
+
+    @BindView(R.id.list_notes_tag)
+    TextView tag;
 
     private final Context context;
     private WikiNote note;
 
     @Setter
-    private EditNoteRecyclerViewAdapter.OnEditNoteClickedListener onClickListener;
+    private ListNotesRecyclerViewAdapter.OnEditNoteClickedListener onClickListener;
 
-    public EditNoteViewHolder(View itemView) {
+    public ListNotesViewHolder(View itemView) {
         super(itemView);
 
         this.context = itemView.getContext();
@@ -36,9 +43,11 @@ public class EditNoteViewHolder extends RecyclerView.ViewHolder {
     public void setItem(WikiNote note) {
         this.note = note;
         content.setText(note.getDescription());
+        date.setText(DateHelper.parseDateToString(note.getDate()));
+        tag.setText(note.getTag());
     }
 
-    @OnClick(R.id.edit_note_card_view)
+    @OnClick(R.id.list_notes_card_view)
     void onNoteClicked() {
         if(onClickListener != null) {
             onClickListener.onEditNoteClicked(note.getDbId());

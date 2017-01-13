@@ -14,8 +14,8 @@ import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.ui.BaseFragment;
-import pl.maniak.wikidiary.utils.di.wikinote.DaggerEditNoteFragmentComponent;
-import pl.maniak.wikidiary.utils.di.wikinote.EditNoteFragmentModule;
+import pl.maniak.wikidiary.utils.di.wikinote.DaggerListNotesFragmentComponent;
+import pl.maniak.wikidiary.utils.di.wikinote.ListNotesFragmentModule;
 
 import static pl.maniak.wikidiary.App.getAppComponent;
 
@@ -23,7 +23,7 @@ import static pl.maniak.wikidiary.App.getAppComponent;
  * Created by mac on 12.01.2017.
  */
 
-public class EditNoteFragmentImpl extends BaseFragment implements EditNoteFragment {
+public class ListNotesFragmentImpl extends BaseFragment implements ListNotesFragment {
 
     @BindView(R.id.edit_note_recycler_view)
     RecyclerView recyclerView;
@@ -32,25 +32,25 @@ public class EditNoteFragmentImpl extends BaseFragment implements EditNoteFragme
     RecyclerView.LayoutManager layoutManager;
 
     @Inject
-    EditNoteRecyclerViewAdapter adapter;
+    ListNotesRecyclerViewAdapter adapter;
 
-    public static EditNoteFragmentImpl newInstance() {
+    public static ListNotesFragmentImpl newInstance() {
 
         Bundle args = new Bundle();
-        EditNoteFragmentImpl fragment = new EditNoteFragmentImpl();
+        ListNotesFragmentImpl fragment = new ListNotesFragmentImpl();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public EditNoteFragmentImpl() {
+    public ListNotesFragmentImpl() {
         // Required empty public constructor
     }
 
     @Override
     protected void initDaggerComponent() {
-        DaggerEditNoteFragmentComponent.builder()
+        DaggerListNotesFragmentComponent.builder()
                 .appComponent(getAppComponent())
-                .editNoteFragmentModule(new EditNoteFragmentModule(this))
+                .listNotesFragmentModule(new ListNotesFragmentModule(this))
                 .build()
                 .inject(this);
     }

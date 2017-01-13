@@ -7,12 +7,17 @@ import java.util.TimeZone;
 
 public class DateHelper {
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy, EEEE");
+    private static SimpleDateFormat simpleDateWithDayNameFormat = new SimpleDateFormat("dd.MM.yyyy, EEEE");
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
 
     public static String getCurrentDateString() {
         Calendar newDate = Calendar.getInstance();
-        return simpleDateFormat.format(newDate.getTime());
+        return simpleDateWithDayNameFormat.format(newDate.getTime());
+    }
+
+    public static String parseDateToStringWithDayName(Date date) {
+        return simpleDateWithDayNameFormat.format(date);
     }
 
     public static String parseDateToString(Date date) {

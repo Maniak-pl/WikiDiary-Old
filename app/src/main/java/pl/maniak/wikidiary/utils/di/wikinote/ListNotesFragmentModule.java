@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import dagger.Module;
 import dagger.Provides;
 import lombok.RequiredArgsConstructor;
-import pl.maniak.wikidiary.ui.wikinote.EditNoteFragment;
-import pl.maniak.wikidiary.ui.wikinote.EditNoteFragmentImpl;
-import pl.maniak.wikidiary.ui.wikinote.EditNoteRecyclerViewAdapter;
+import pl.maniak.wikidiary.ui.wikinote.ListNotesFragmentImpl;
+import pl.maniak.wikidiary.ui.wikinote.ListNotesRecyclerViewAdapter;
 
 @Module
 @RequiredArgsConstructor
-public class EditNoteFragmentModule {
+public class ListNotesFragmentModule {
 
-    private final EditNoteFragmentImpl fragment;
+    private final ListNotesFragmentImpl fragment;
 
     @Provides
     RecyclerView.LayoutManager provideLayoutManager() {
@@ -26,7 +25,7 @@ public class EditNoteFragmentModule {
     }
 
     @Provides
-    EditNoteRecyclerViewAdapter provideAdapter() {
-        return new EditNoteRecyclerViewAdapter(new ArrayList<>());
+    ListNotesRecyclerViewAdapter provideAdapter() {
+        return new ListNotesRecyclerViewAdapter(new ArrayList<>());
     }
 }

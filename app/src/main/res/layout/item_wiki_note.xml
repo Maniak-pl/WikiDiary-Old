@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_notes_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="5dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/list_notes_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            tools:text="ToDo"
+            />
+
+        <TextView
+            android:id="@+id/list_notes_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:textStyle="bold"
+            tools:text="15.01.2017"/>
+
+        <TextView
+            android:id="@+id/list_notes_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_notes_tag"
+            android:padding="6dp"
+            android:gravity="center"
+            tools:text="Taking out the trash on Tuesday" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+

@@ -30,11 +30,9 @@ import javax.inject.Inject;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
-import pl.maniak.wikidiary.fragments.SettingsFragment;
 import pl.maniak.wikidiary.helpers.WikiHelper;
 import pl.maniak.wikidiary.helpers.WikiParser;
 import pl.maniak.wikidiary.modals.AddTagDialogFragment;
@@ -43,12 +41,10 @@ import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
-import pl.maniak.wikidiary.ui.wikinote.EditNoteFragmentImpl;
+import pl.maniak.wikidiary.ui.wikinote.ListNotesFragmentImpl;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
-import pl.maniak.wikidiary.utils.di.wikinote.DaggerEditNoteFragmentComponent;
-import pl.maniak.wikidiary.utils.di.wikinote.EditNoteFragmentModule;
 
 import static pl.maniak.wikidiary.App.getAppComponent;
 
@@ -227,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case 1:
                     return PreparingNoteFragment.newInstance();
                 default:
-                    return EditNoteFragmentImpl.newInstance();
+                    return ListNotesFragmentImpl.newInstance();
             }
 
         }
@@ -242,11 +238,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Main";
+                    return "Add";
                 case 1:
                     return "Preparing Note";
                 case 2:
-                    return "Settings";
+                    return "List";
             }
             return null;
         }

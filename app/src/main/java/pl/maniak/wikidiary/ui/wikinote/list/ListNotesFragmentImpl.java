@@ -14,8 +14,9 @@ import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.ui.BaseFragment;
-import pl.maniak.wikidiary.utils.di.wikinote.DaggerListNotesFragmentComponent;
-import pl.maniak.wikidiary.utils.di.wikinote.ListNotesFragmentModule;
+import pl.maniak.wikidiary.utils.di.wikinote.list.DaggerListNotesFragmentComponent;
+import pl.maniak.wikidiary.utils.di.wikinote.list.ListNotesFragmentModule;
+
 
 import static pl.maniak.wikidiary.App.getAppComponent;
 

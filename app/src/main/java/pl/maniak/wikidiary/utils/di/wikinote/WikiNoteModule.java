@@ -11,6 +11,7 @@ import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.ui.wikinote.WikiNoteActivity;
 import pl.maniak.wikidiary.ui.wikinote.WikiNoteContract;
+import pl.maniak.wikidiary.ui.wikinote.WikiNotePagerAdapter;
 import pl.maniak.wikidiary.ui.wikinote.WikiNotePresenter;
 import pl.maniak.wikidiary.utils.ObservableList;
 import pl.maniak.wikidiary.utils.ObservableListImpl;
@@ -39,6 +40,11 @@ public class WikiNoteModule {
     @Provides
     FragmentManager provideFragmentManager() {
         return activity.getSupportFragmentManager();
+    }
+
+    @Provides
+    WikiNotePagerAdapter providePagerAdapter(FragmentManager fragmentManager) {
+        return new WikiNotePagerAdapter(fragmentManager);
     }
 
 

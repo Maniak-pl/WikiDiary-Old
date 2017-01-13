@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.utils.di.wikinote;
+package pl.maniak.wikidiary.utils.di.wikinote.list;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

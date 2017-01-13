@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.utils.di.wikinote;
+package pl.maniak.wikidiary.utils.di.wikinote.list;
 
 
 import dagger.Component;

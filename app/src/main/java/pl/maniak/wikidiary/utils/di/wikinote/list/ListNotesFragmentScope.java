@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.utils.di.wikinote;
+package pl.maniak.wikidiary.utils.di.wikinote.list;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

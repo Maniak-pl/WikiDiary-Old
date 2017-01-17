@@ -6,20 +6,12 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -30,26 +22,25 @@ import javax.inject.Inject;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
+import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.fragments.MainFragment;
 import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
-import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragment;
-import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragmentImpl;
-import pl.maniak.wikidiary.utils.helpers.WikiHelper;
-import pl.maniak.wikidiary.utils.helpers.WikiParser;
 import pl.maniak.wikidiary.modals.AddTagDialogFragment;
 import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
 import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
-import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
-import pl.maniak.wikidiary.ui.todo.TodoActivity;
+import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragment;
+import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragmentImpl;
 import pl.maniak.wikidiary.utils.Constants;
 import pl.maniak.wikidiary.utils.L;
 import pl.maniak.wikidiary.utils.Mail;
+import pl.maniak.wikidiary.utils.helpers.WikiHelper;
+import pl.maniak.wikidiary.utils.helpers.WikiParser;
 
 import static pl.maniak.wikidiary.App.getAppComponent;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
@@ -67,33 +58,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setItemIconTintList(null);
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-
         getAppComponent().inject(this);
-
     }
 
 
@@ -137,62 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.action_settings:
-                startSettings();
-                return true;
-            case R.id.action_todo:
-                startToDo();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        switch (item.getItemId()) {
-            case R.id.nav_settings:
-                startSettings();
-                break;
-            case R.id.nav_s_health:
-                startSHealthDialog();
-                break;
-            case R.id.nav_time:
-                break;
-            case R.id.nav_mic:
-                startVoiceRecognitionDialog();
-                break;
-            case R.id.nav_send:
-                sendMail();
-                break;
-            case R.id.nav_add_tag:
-                showAddTagDialog();
-                break;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
     private void sendMail() {
         if (App.getInstance().getPrefBoolea(Constants.SEND_EMAIL_MESSAGE)) {
             new Thread(new Runnable() {
@@ -204,13 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             App.postMessage(R.string.turn_on_mail);
         }
-
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -219,35 +127,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
                     return MainFragment.newInstance();
                 case 1:
                     return PreparingNoteFragment.newInstance();
                 default:
-                    return (ListNotesFragmentImpl)listNotesFragment;
+                    return (ListNotesFragmentImpl) listNotesFragment;
             }
-
         }
 
         @Override
         public int getCount() {            // Show 3 total pages.
             return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "Add";
-                case 1:
-                    return "Preparing Note";
-                case 2:
-                    return "List";
-            }
-            return null;
         }
     }
 
@@ -325,16 +217,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void startSettings() {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
-    private void startToDo() {
-        Intent intent = new Intent(this, TodoActivity.class);
-        startActivity(intent);
-    }
-
     private void startSHealthDialog() {
         NumberKeyboardDialogFragment keyboardDialog = NumberKeyboardDialogFragment.newInstance("S Health");
         keyboardDialog.show(getSupportFragmentManager(), "Number_Keybord");
@@ -344,7 +226,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AddTagDialogFragment fragment = AddTagDialogFragment.newInstance();
         fragment.show(getSupportFragmentManager(), "Add Tag");
     }
-
 
 
     public void startVoiceRecognitionDialog() {
@@ -367,12 +248,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             VoiceNoteDialogFragment voiceNoteDialogFragment = VoiceNoteDialogFragment.newInstance(matches);
             voiceNoteDialogFragment.show(getSupportFragmentManager(), "VoiceNote");
-
         }
     }
-
-
-
 
 
          /*

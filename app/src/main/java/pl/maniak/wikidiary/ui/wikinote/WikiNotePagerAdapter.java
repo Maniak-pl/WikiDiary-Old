@@ -1,6 +1,5 @@
 package pl.maniak.wikidiary.ui.wikinote;
 
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -44,6 +43,18 @@ public class WikiNotePagerAdapter extends FragmentStatePagerAdapter{
         return PAGE_NUMBER;
     }
 
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return "Add";
+            case 1:
+                return "Preparing Note";
+            case 2:
+                return "List";
+        }
+        return null;
+    }
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);

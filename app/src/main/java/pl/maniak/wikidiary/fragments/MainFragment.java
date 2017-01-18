@@ -1,6 +1,7 @@
 package pl.maniak.wikidiary.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.events.CommandEvent;
+import pl.maniak.wikidiary.ui.wikinote.add.AddNoteFragment;
 import pl.maniak.wikidiary.utils.helpers.DateHelper;
 import pl.maniak.wikidiary.modals.CommandDialogFragment;
 import pl.maniak.wikidiary.domain.tag.Tag;
@@ -39,7 +41,7 @@ import pl.maniak.wikidiary.ui.views.FlowLayout;
 /**
  * Created by pliszka on 01.03.16.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements AddNoteFragment {
 
 
     @BindView(R.id.editText)
@@ -54,6 +56,8 @@ public class MainFragment extends Fragment {
 
     @Inject
     public WikiNoteRepository wikiNoteRepository;
+
+    private AddNoteFragment.FragmentCallback callback;
 
 
     private List<Tag> tag = new ArrayList();
@@ -77,7 +81,17 @@ public class MainFragment extends Fragment {
         ButterKnife.bind(this, root);
         setUpView();
 
+        setFragmentCallback(getActivity());
+
         return root;
+    }
+
+    private void setFragmentCallback(Context context) {
+        try {
+            callback = (AddNoteFragment.FragmentCallback) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Activity has to implement " + AddNoteFragment.FragmentCallback.class.getSimpleName());
+        }
     }
 
     private void setUpView() {
@@ -236,7 +250,8 @@ public class MainFragment extends Fragment {
     }
 
     private void startQuickCommands() {
-        CommandDialogFragment fragment = CommandDialogFragment.newInstance();
-        fragment.show(getFragmentManager(), "QuickCommands");
+        if(callback != null) {
+            callback.onCommandClicked();
+        }
     }
 }

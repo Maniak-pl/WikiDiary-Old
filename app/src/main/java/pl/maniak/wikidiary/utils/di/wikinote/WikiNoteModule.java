@@ -9,6 +9,10 @@ import dagger.Provides;
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
+import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUseCase;
+import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUserCaseImpl;
+import pl.maniak.wikidiary.modals.CommandDialogFragment;
+import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.ui.wikinote.WikiNoteActivity;
 import pl.maniak.wikidiary.ui.wikinote.WikiNoteContract;
 import pl.maniak.wikidiary.ui.wikinote.WikiNotePagerAdapter;
@@ -33,8 +37,8 @@ public class WikiNoteModule {
     }
 
     @Provides
-    WikiNoteContract.Presenter providePresenter(ObservableList<WikiNote> wikiNoteObservableList, ObservableList<Tag> tagObservableList) {
-        return new WikiNotePresenter(wikiNoteObservableList, tagObservableList);
+    WikiNoteContract.Presenter providePresenter(ObservableList<WikiNote> wikiNoteObservableList, ObservableList<Tag> tagObservableList, WikiNoteUseCase useCase) {
+        return new WikiNotePresenter(wikiNoteObservableList, tagObservableList, useCase);
     }
 
     @Provides
@@ -45,6 +49,16 @@ public class WikiNoteModule {
     @Provides
     WikiNotePagerAdapter providePagerAdapter(FragmentManager fragmentManager) {
         return new WikiNotePagerAdapter(fragmentManager);
+    }
+
+    @Provides
+    WikiNoteUseCase provideNoteUseCase(WikiNoteRepository repository) {
+        return new WikiNoteUserCaseImpl(repository);
+    }
+
+    @Provides
+    CommandDialogFragment provideCommandDialog() {
+        return CommandDialogFragment.newInstance();
     }
 
 

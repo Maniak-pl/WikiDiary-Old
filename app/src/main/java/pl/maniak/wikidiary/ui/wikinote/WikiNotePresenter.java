@@ -13,12 +13,10 @@ public class WikiNotePresenter implements WikiNoteContract.Presenter {
 
     private final ObservableList<WikiNote> noteObservableList;
     private final ObservableList<Tag> tagObservableList;
+    private final WikiNoteUseCase useCase;
 
     private WikiNoteContract.View view;
     private WikiNoteContract.Router router;
-
-    @Inject
-    WikiNoteUseCase useCase;
 
     @Override
     public void attachView(WikiNoteContract.View view) {

@@ -16,13 +16,15 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.activitys.SettingsActivity;
+import pl.maniak.wikidiary.modals.CommandDialogFragment;
 import pl.maniak.wikidiary.ui.BaseActivity;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
+import pl.maniak.wikidiary.ui.wikinote.add.AddNoteFragment;
 import pl.maniak.wikidiary.utils.di.wikinote.DaggerWikiNoteComponent;
 import pl.maniak.wikidiary.utils.di.wikinote.WikiNoteModule;
 
 
-public class WikiNoteActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, WikiNoteContract.View, WikiNoteContract.Router {
+public class WikiNoteActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, WikiNoteContract.View, WikiNoteContract.Router, AddNoteFragment.FragmentCallback {
 
     @BindView(R.id.container)
     ViewPager viewPager;
@@ -44,6 +46,9 @@ public class WikiNoteActivity extends BaseActivity implements NavigationView.OnN
 
     @Inject
     WikiNotePagerAdapter pagerAdapter;
+
+    @Inject
+    CommandDialogFragment commandDialog;
 
     @Override
     protected int getLayoutId() {
@@ -159,5 +164,10 @@ public class WikiNoteActivity extends BaseActivity implements NavigationView.OnN
     @Override
     public void navigateToNewTask() {
         startActivity(new Intent(this, TodoActivity.class));
+    }
+
+    @Override
+    public void onCommandClicked() {
+        commandDialog.show(getSupportFragmentManager(), "QuickCommands");
     }
 }

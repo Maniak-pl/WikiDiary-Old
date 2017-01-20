@@ -1,6 +1,8 @@
 package pl.maniak.wikidiary.ui.todo;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -143,6 +145,7 @@ public class TodoActivity extends BaseActivity implements TodoContract.View, Tod
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_todo_edit);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         TextView titleView = (TextView) dialog.findViewById(R.id.custom_title);
         final EditText editCustom =

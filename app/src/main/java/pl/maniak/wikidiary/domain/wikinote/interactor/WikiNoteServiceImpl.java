@@ -8,7 +8,7 @@ import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 
 
 @RequiredArgsConstructor
-public class WikiNoteUserCaseImpl implements WikiNoteUseCase {
+public class WikiNoteServiceImpl implements WikiNoteService {
 
     private final WikiNoteRepository repository;
 

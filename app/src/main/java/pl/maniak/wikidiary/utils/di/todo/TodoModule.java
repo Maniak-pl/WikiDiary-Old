@@ -10,16 +10,15 @@ import dagger.Module;
 import dagger.Provides;
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.App;
+import pl.maniak.wikidiary.domain.todo.interactor.TodoServiceImpl;
+import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteService;
 import pl.maniak.wikidiary.repository.DBHelper;
 import pl.maniak.wikidiary.repository.todo.TodoRepositoryImpl;
-import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCase;
-import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCaseImpl;
+import pl.maniak.wikidiary.domain.todo.interactor.TodoService;
 import pl.maniak.wikidiary.repository.todo.TodoRepository;
 import pl.maniak.wikidiary.domain.todo.Task;
-import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUseCase;
-import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUserCaseImpl;
+import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteServiceImpl;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
-import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepositoryImpl;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
 import pl.maniak.wikidiary.ui.todo.TodoContract;
 import pl.maniak.wikidiary.ui.todo.TodoPresenter;
@@ -44,7 +43,7 @@ public class TodoModule {
     }
 
     @Provides
-    TodoContract.Presenter providePresenter(ObservableList<Task> observableList, TodoUseCase useCase) {
+    TodoContract.Presenter providePresenter(ObservableList<Task> observableList, TodoService useCase) {
         return new TodoPresenter(observableList, useCase);
     }
 
@@ -63,18 +62,18 @@ public class TodoModule {
     }
 
     @Provides
-    TodoRepository provideTodoRepository(){
-        return new TodoRepositoryImpl(App.getAppComponent().getDBHelper());
+    TodoRepository provideTodoRepository(DBHelper helper){
+        return new TodoRepositoryImpl(helper);
     }
 
     @Provides
-    TodoUseCase provideTodoUseCase(TodoRepository repository, WikiNoteUseCase useCase) {
-        return new TodoUseCaseImpl(repository, useCase);
+    TodoService provideTodoUseCase(TodoRepository repository, WikiNoteService service) {
+        return new TodoServiceImpl(repository, service);
     }
 
     @Provides
-    WikiNoteUseCase provideWikiNoteUseCase(WikiNoteRepository repository) {
-        return new WikiNoteUserCaseImpl(repository);
+    WikiNoteService provideWikiNoteUseCase(WikiNoteRepository repository) {
+        return new WikiNoteServiceImpl(repository);
     }
 
 }

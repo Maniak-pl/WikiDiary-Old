@@ -4,7 +4,7 @@ import java.util.List;
 
 import pl.maniak.wikidiary.domain.todo.Task;
 
-public interface TodoUseCase {
+public interface TodoService {
     Task getTask(Long id);
     List<Task> getAllTasks();
     void save(Task task);

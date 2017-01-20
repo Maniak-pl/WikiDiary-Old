@@ -5,7 +5,7 @@ import java.util.List;
 import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 
-public interface WikiNoteUseCase {
+public interface WikiNoteService {
     WikiNote getWikiNote(Long id);
     List<WikiNote> getAllWikiNotes();
     void save(WikiNote wikiNote);

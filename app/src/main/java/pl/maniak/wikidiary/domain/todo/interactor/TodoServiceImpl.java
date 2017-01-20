@@ -5,16 +5,16 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.todo.Task;
+import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteService;
 import pl.maniak.wikidiary.repository.todo.TodoRepository;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
-import pl.maniak.wikidiary.domain.wikinote.interactor.WikiNoteUseCase;
 import pl.maniak.wikidiary.utils.Constants;
 
 @RequiredArgsConstructor
-public class TodoUseCaseImpl implements TodoUseCase {
+public class TodoServiceImpl implements TodoService {
 
     private final TodoRepository repository;
-    private final WikiNoteUseCase useCase;
+    private final WikiNoteService service;
 
     @Override
     public Task getTask(Long id) {
@@ -71,6 +71,6 @@ public class TodoUseCaseImpl implements TodoUseCase {
 
 
     private void saveWikiNote(String content, Date date) {
-        useCase.save(new WikiNote(Constants.TAG_TODO, content,date));
+        service.save(new WikiNote(Constants.TAG_TODO, content,date));
     }
 }

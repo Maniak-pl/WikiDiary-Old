@@ -3,7 +3,7 @@ package pl.maniak.wikidiary.ui.todo;
 import java.util.Date;
 
 import lombok.RequiredArgsConstructor;
-import pl.maniak.wikidiary.domain.todo.interactor.TodoUseCase;
+import pl.maniak.wikidiary.domain.todo.interactor.TodoService;
 import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.utils.ObservableList;
 import rx.schedulers.Schedulers;
@@ -12,7 +12,7 @@ import rx.schedulers.Schedulers;
 public class TodoPresenter implements TodoContract.Presenter {
 
     private final ObservableList<Task> tasks;
-    private final TodoUseCase useCase;
+    private final TodoService service;
     private Long currentTaskId;
 
     private TodoContract.View view;
@@ -36,7 +36,7 @@ public class TodoPresenter implements TodoContract.Presenter {
 
     private void updateTasks() {
         clearTasks();
-        tasks.addAll(useCase.getAllTasks());
+        tasks.addAll(service.getAllTasks());
     }
 
     private void clearTasks() {
@@ -66,26 +66,26 @@ public class TodoPresenter implements TodoContract.Presenter {
 
     @Override
     public void onDoneChecked(long taskId) {
-        useCase.done(useCase.getTask(taskId));
+        service.done(service.getTask(taskId));
         updateTasks();
     }
 
     @Override
     public void onEditTaskOptionClicked() {
         if(view != null) {
-            view.showEditTaskEditor(useCase.getTask(currentTaskId));
+            view.showEditTaskEditor(service.getTask(currentTaskId));
         }
     }
 
     @Override
     public void onDeleteTaskOptionClicked() {
-        useCase.delete(currentTaskId);
+        service.delete(currentTaskId);
         updateTasks();
     }
 
     @Override
     public void onCommitNewTaskButtonClicked(String content) {
-        useCase.save(new Task(content, getCurrentDate()));
+        service.save(new Task(content, getCurrentDate()));
         updateTasks();
     }
 
@@ -96,10 +96,10 @@ public class TodoPresenter implements TodoContract.Presenter {
     }
 
     private void updateTaskAndSaveInRepository(String content) {
-        Task currentTask = useCase.getTask(currentTaskId);
+        Task currentTask = service.getTask(currentTaskId);
         currentTask.setContent(content);
         currentTask.setDate(getCurrentDate());
-        useCase.update(currentTask);
+        service.update(currentTask);
     }
 
     @Override

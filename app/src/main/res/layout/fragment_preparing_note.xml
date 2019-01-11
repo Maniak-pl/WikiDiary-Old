@@ -3,7 +3,32 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/copyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Copy"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/function_tag_button_bg"/>
+
+        <TextView
+            android:id="@+id/switchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Switch"
+            android:background="@drawable/function_tag_button_bg"/>
+
+    </LinearLayout>
+
+
     <ScrollView
+        android:id="@+id/textScrean"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -14,5 +39,11 @@
             android:padding="@dimen/padding_default"
             />
     </ScrollView>
+
+    <WebView
+        android:id="@+id/webScrean"
+        android:layout_width="match_parent"
+        android:visibility="invisible"
+        android:layout_height="match_parent"></WebView>
 
 </LinearLayout>

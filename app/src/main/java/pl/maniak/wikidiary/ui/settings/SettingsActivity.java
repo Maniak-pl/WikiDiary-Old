@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.activitys;
+package pl.maniak.wikidiary.ui.settings;
 
 import android.annotation.TargetApi;
 import android.content.Context;

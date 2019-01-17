@@ -1,8 +1,5 @@
-package pl.maniak.wikidiary.events;
+package pl.maniak.wikidiary.utils.events;
 
-/**
- * Created by Sony on 2015-11-02.
- */
 public class CommandEvent {
 
     public static final int START = 1;
@@ -25,21 +22,23 @@ public class CommandEvent {
     public static final int SHOW_ADD_TAG = 52;
 
 
+    private final int event;
     private final String message;
-    private final int status;
 
+    public CommandEvent(int event) {
+        this(event, "");
+    }
 
-    public CommandEvent(int status, String message) {
+    public CommandEvent(int event, String message) {
+        this.event = event;
         this.message = message;
-        this.status = status;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public int getStatus() {
-        return status;
+    public int getEvent() {
+        return event;
     }
-
 }

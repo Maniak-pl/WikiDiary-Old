@@ -1,6 +1,8 @@
-package pl.maniak.wikidiary.utils;
+package pl.maniak.wikidiary.utils.log;
 
 import android.util.Log;
+
+import pl.maniak.wikidiary.utils.Constants;
 
 
 /**

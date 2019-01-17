@@ -9,7 +9,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.DBHelper;
-import pl.maniak.wikidiary.utils.L;
+import pl.maniak.wikidiary.utils.log.L;
 
 @RequiredArgsConstructor
 public class WikiNoteRepositoryImpl implements WikiNoteRepository {

@@ -8,8 +8,8 @@ import android.preference.PreferenceManager;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.utils.di.AppComponent;
 import pl.maniak.wikidiary.utils.di.AppModule;
-import pl.maniak.wikidiary.events.CommandEvent;
 import pl.maniak.wikidiary.utils.di.DaggerAppComponent;
+import pl.maniak.wikidiary.utils.events.CommandEvent;
 
 /**
  * Created by maniak on 01.03.16.

@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.fragments;
+package pl.maniak.wikidiary.ui.settings.fragments;
 
 
 import android.content.SharedPreferences;
@@ -25,7 +25,7 @@ import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.repository.tag.TagRepository;
-import pl.maniak.wikidiary.ui.views.FlowLayout;
+import pl.maniak.wikidiary.utils.views.FlowLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +35,7 @@ public class SettingsFragment extends Fragment {
     @BindView(R.id.addTagEt)
     EditText addTagEt;
     @BindView(R.id.settingsContainerTags)
-    pl.maniak.wikidiary.ui.views.FlowLayout mFlowLayout;
+    FlowLayout mFlowLayout;
 
     private Set<Tag> setTag = new TreeSet<Tag>();
 

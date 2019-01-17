@@ -3,7 +3,7 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="pl.maniak.wikidiary.activitys.SettingsActivity$EmailPreferenceFragment"
+        android:fragment="pl.maniak.wikidiary.ui.settings.SettingsActivity$EmailPreferenceFragment"
         android:icon="@drawable/ic_email_24dp"
         android:title="@string/pref_header_email" />
 

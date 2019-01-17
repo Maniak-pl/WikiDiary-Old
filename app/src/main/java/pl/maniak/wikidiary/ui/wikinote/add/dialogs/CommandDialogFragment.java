@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.modals;
+package pl.maniak.wikidiary.ui.wikinote.add.dialogs;
 
 import android.app.Dialog;
 import android.graphics.Color;
@@ -6,17 +6,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.events.CommandEvent;
+import pl.maniak.wikidiary.utils.events.CommandEvent;
 
 /**
  * Created by Sony on 2016-01-17.

@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.activitys;
+package pl.maniak.wikidiary.ui.wikinote;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -30,21 +30,22 @@ import javax.inject.Inject;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.events.CommandEvent;
-import pl.maniak.wikidiary.fragments.MainFragment;
-import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
+import pl.maniak.wikidiary.ui.settings.SettingsActivity;
+import pl.maniak.wikidiary.utils.events.CommandEvent;
+import pl.maniak.wikidiary.ui.wikinote.add.MainFragment;
+import pl.maniak.wikidiary.ui.wikinote.prepare.PreparingNoteFragment;
 import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragment;
 import pl.maniak.wikidiary.ui.wikinote.list.ListNotesFragmentImpl;
 import pl.maniak.wikidiary.utils.helpers.WikiHelper;
 import pl.maniak.wikidiary.utils.helpers.WikiParser;
-import pl.maniak.wikidiary.modals.AddTagDialogFragment;
-import pl.maniak.wikidiary.modals.NumberKeyboardDialogFragment;
-import pl.maniak.wikidiary.modals.VoiceNoteDialogFragment;
+import pl.maniak.wikidiary.ui.wikinote.add.dialogs.AddTagDialogFragment;
+import pl.maniak.wikidiary.ui.wikinote.add.dialogs.NumberKeyboardDialogFragment;
+import pl.maniak.wikidiary.ui.wikinote.add.dialogs.VoiceNoteDialogFragment;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.ui.todo.TodoActivity;
 import pl.maniak.wikidiary.utils.Constants;
-import pl.maniak.wikidiary.utils.L;
+import pl.maniak.wikidiary.utils.log.L;
 import pl.maniak.wikidiary.utils.Mail;
 
 import static pl.maniak.wikidiary.App.getAppComponent;
@@ -253,9 +254,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void onEventMainThread(CommandEvent event) {
-        L.w("BaseActivity.onEventMainThread() called with " + "syncEvent = [" + event.getStatus() + "]");
+        L.w("BaseActivity.onEventMainThread() called with " + "syncEvent = [" + event.getEvent() + "]");
 
-        switch (event.getStatus()) {
+        switch (event.getEvent()) {
             case CommandEvent.START:
                 showProgress();
                 break;

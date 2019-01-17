@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.fragments;
+package pl.maniak.wikidiary.ui.wikinote.prepare;
 
 import android.content.ClipboardManager;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
-import pl.maniak.wikidiary.utils.L;
+import pl.maniak.wikidiary.utils.log.L;
 import pl.maniak.wikidiary.utils.helpers.WikiHelper;
 
 import static android.content.Context.CLIPBOARD_SERVICE;

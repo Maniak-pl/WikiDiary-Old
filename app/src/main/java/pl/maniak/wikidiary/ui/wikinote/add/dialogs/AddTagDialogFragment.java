@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.modals;
+package pl.maniak.wikidiary.ui.wikinote.add.dialogs;
 
 
 import android.app.Dialog;
@@ -26,10 +26,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.events.CommandEvent;
+import pl.maniak.wikidiary.utils.events.CommandEvent;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.repository.tag.TagRepository;
-import pl.maniak.wikidiary.ui.views.FlowLayout;
+import pl.maniak.wikidiary.utils.views.FlowLayout;
 
 
 public class AddTagDialogFragment extends DialogFragment {

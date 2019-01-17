@@ -1,4 +1,4 @@
-package pl.maniak.wikidiary.fragments;
+package pl.maniak.wikidiary.ui.wikinote.add;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -25,16 +25,16 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import pl.maniak.wikidiary.App;
 import pl.maniak.wikidiary.R;
-import pl.maniak.wikidiary.events.CommandEvent;
+import pl.maniak.wikidiary.utils.events.CommandEvent;
 import pl.maniak.wikidiary.utils.helpers.DateHelper;
-import pl.maniak.wikidiary.modals.CommandDialogFragment;
+import pl.maniak.wikidiary.ui.wikinote.add.dialogs.CommandDialogFragment;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
 import pl.maniak.wikidiary.repository.tag.TagRepository;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.utils.Constants;
-import pl.maniak.wikidiary.utils.L;
-import pl.maniak.wikidiary.ui.views.FlowLayout;
+import pl.maniak.wikidiary.utils.log.L;
+import pl.maniak.wikidiary.utils.views.FlowLayout;
 
 /**
  * Created by pliszka on 01.03.16.
@@ -214,9 +214,9 @@ public class MainFragment extends Fragment {
     }
 
     public void onEventMainThread(CommandEvent event) {
-        L.w("BaseActivity.onEventMainThread() called with " + "syncEvent = [" + event.getStatus() + "]");
+        L.w("BaseActivity.onEventMainThread() called with " + "syncEvent = [" + event.getEvent() + "]");
 
-        switch (event.getStatus()) {
+        switch (event.getEvent()) {
             case CommandEvent.SHOW_VOICE_NOTE:
                 final String note = event.getMessage();
 

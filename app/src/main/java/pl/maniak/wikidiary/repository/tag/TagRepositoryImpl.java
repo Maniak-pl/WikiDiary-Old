@@ -10,7 +10,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.repository.DBHelper;
-import pl.maniak.wikidiary.utils.L;
+import pl.maniak.wikidiary.utils.log.L;
 
 @RequiredArgsConstructor
 public class TagRepositoryImpl implements TagRepository {

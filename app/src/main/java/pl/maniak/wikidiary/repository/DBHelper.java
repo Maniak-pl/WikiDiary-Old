@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import pl.maniak.wikidiary.domain.tag.Tag;
 import pl.maniak.wikidiary.domain.todo.Task;
 import pl.maniak.wikidiary.domain.wikinote.WikiNote;
-import pl.maniak.wikidiary.utils.L;
+import pl.maniak.wikidiary.utils.log.L;
 
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 

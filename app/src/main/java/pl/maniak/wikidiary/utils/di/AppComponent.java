@@ -4,12 +4,12 @@ package pl.maniak.wikidiary.utils.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import pl.maniak.wikidiary.activitys.MainActivity;
+import pl.maniak.wikidiary.ui.wikinote.MainActivity;
 import pl.maniak.wikidiary.repository.DBHelper;
-import pl.maniak.wikidiary.fragments.MainFragment;
-import pl.maniak.wikidiary.fragments.PreparingNoteFragment;
-import pl.maniak.wikidiary.fragments.SettingsFragment;
-import pl.maniak.wikidiary.modals.AddTagDialogFragment;
+import pl.maniak.wikidiary.ui.wikinote.add.MainFragment;
+import pl.maniak.wikidiary.ui.wikinote.prepare.PreparingNoteFragment;
+import pl.maniak.wikidiary.ui.settings.fragments.SettingsFragment;
+import pl.maniak.wikidiary.ui.wikinote.add.dialogs.AddTagDialogFragment;
 import pl.maniak.wikidiary.repository.wikinote.WikiNoteRepository;
 import pl.maniak.wikidiary.utils.config.ResourceProvider;
 
